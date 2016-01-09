@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/searchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="Filter issues by title"/>
+
+    <EditText
+        android:id="@+id/searchCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/searchTitle"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="Filter issues by city"/>
+
+    <Button
+        android:id="@+id/searchButton"
+        android:text="Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchCity"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:onClick="onSearchButtonClick"/>
+
+    <!-- TODO: add animation while requesting information from database -->
+    <TextView
+        android:text="Animation"
+        android:layout_below="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

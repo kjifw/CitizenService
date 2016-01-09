@@ -7,11 +7,18 @@
     android:fitsSystemWindows="true"
     tools:context="com.citizen.service.citizenservice.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/internalToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"/>
+
     <android.support.v4.view.ViewPager
-        android:id="@+id/mainViewPager"
+        android:id="@+id/internalViewPager"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/internalToolbar">
 
     </android.support.v4.view.ViewPager>
 

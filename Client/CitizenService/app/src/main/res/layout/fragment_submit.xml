@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/submitTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="Input Title"/>
+
+    <EditText
+        android:id="@+id/submitDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/submitTitle"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="Input Description"
+        android:inputType="textMultiLine"
+        android:maxHeight="180dp"/>
+
+   <!-- TODO: add images -->
+    <TextView
+        android:id="@+id/images"
+        android:text="Images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/submitDescription"/>
+
+    <Button
+        android:id="@+id/submitButton"
+        android:text="Submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/images"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:onClick="onSubmitButtonClick"/>
+
+</RelativeLayout>

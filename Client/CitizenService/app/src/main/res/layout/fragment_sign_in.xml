@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/signInEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="@string/sign_in_email"/>
+
+    <EditText
+        android:id="@+id/signInPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:layout_below="@+id/signInEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:hint="@string/sign_in_password"/>
+
+    <Button
+        android:id="@+id/signInButton"
+        android:text="@string/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signInPassword"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:onClick="onSignInButtonClick"/>
+
+    <TextView
+        android:id="@+id/linkToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="@string/link_to_register_text"
+        android:textSize="14sp"
+        android:layout_below="@+id/signInButton"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:onClick="navigateToRegister"/>
+
+</RelativeLayout>

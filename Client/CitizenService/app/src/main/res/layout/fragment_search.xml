@@ -30,10 +30,17 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:onClick="onSearchButtonClick"/>
 
-    <!-- TODO: add animation while requesting information from database -->
-    <TextView
-        android:text="Animation"
-        android:layout_below="@+id/searchButton"
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_below="@+id/searchButton"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
 </RelativeLayout>

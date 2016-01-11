@@ -15,7 +15,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class InternalActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class InternalActivity extends AppCompatActivity implements ActivityManager{
     ViewPager viewPager;
 
     @Override
@@ -24,7 +27,17 @@ public class InternalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_internal);
 
         viewPager = (ViewPager) findViewById(R.id.internalViewPager);
-        InternalPagerAdapter adapter = new InternalPagerAdapter(getSupportFragmentManager());
+
+        List<Fragment> fragments = new ArrayList<Fragment>();
+        fragments.add(new IssuesFragment());
+        fragments.add(new SearchFragment());
+        fragments.add(new SubmitFragment());
+        fragments.add(new MyIssuesFragment());
+        fragments.add(new SearchResultFragment());
+        fragments.add(new MyIssuesItemDetailsFragment());
+        fragments.add(new ItemDetailsFragment());
+
+        InternalPagerAdapter adapter = new InternalPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
 
         InitializeDrawer();
@@ -89,35 +102,32 @@ public class InternalActivity extends AppCompatActivity {
 //            return;
 //        }
 
-        viewPager.setCurrentItem(3);
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        // TODO: load information from database and uncomment next row
+        // viewPager.setCurrentItem(3);
+    }
+
+    @Override
+    public void setDetailsInformation(int itemId) {
+        // TODO: load information for the selected item from ListView into details page
     }
 
     public class InternalPagerAdapter extends FragmentPagerAdapter {
-        public InternalPagerAdapter(FragmentManager fm) {
+        private List<Fragment> fragments;
+
+        public InternalPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
+            this.fragments = fragments;
         }
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return new IssuesFragment();
-                case 1:
-                    return new SearchFragment();
-                case 2:
-                    return new SubmitFragment();
-                case 3:
-                    return new SearchResultFragment();
-                case 4:
-                    return new MyIssuesFragment();
-                default:
-                    return null;
-            }
+            return this.fragments.get(position);
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return this.fragments.size();
         }
     }
 }

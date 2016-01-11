@@ -31,7 +31,7 @@
         android:layout_below="@+id/registerPassword"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="Confirm Password"/>
+        android:hint="@string/register_repeat_password"/>
 
     <Button
         android:id="@+id/registerButton"

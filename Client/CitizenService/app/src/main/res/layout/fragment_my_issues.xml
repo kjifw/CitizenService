@@ -4,5 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO: create nav drawer -->
+    <include layout="@layout/issues_list"/>
+
 </RelativeLayout>

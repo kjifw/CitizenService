@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -61,23 +62,36 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         dbHandler = new CitiesDbHandler(this, null);
     }
 
+    public void takePhoto(View view){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, 1);
+        }
+    }
+
     public void onSelectPictureButtonClick(View view){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 0);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                Uri selectedImageUri = data.getData();
+        if(resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 0:
+                    Uri selectedImageUri = data.getData();
 
-                ImageView item = new ImageView(getApplicationContext());
-                item.setImageURI(selectedImageUri);
+                    ImageView item = new ImageView(getApplicationContext());
+                    item.setImageURI(selectedImageUri);
 
-                imagesView = (LinearLayout) findViewById(R.id.submitImages);
-                imagesView.addView(item);
+                    imagesView = (LinearLayout) findViewById(R.id.submitImages);
+                    imagesView.addView(item);
+                    break;
+                case 1:
+
+                    // TODO: save photo to gallery and tell user picture is taken successfully
+                    break;
             }
         }
     }
@@ -95,13 +109,16 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         listViewDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                viewPager.setCurrentItem(position);
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-                drawer.closeDrawers();
+                if(position == 4) {
+                    takePhoto(view);
+                } else {
+                    viewPager.setCurrentItem(position);
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+                    drawer.closeDrawers();
+                }
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.internalToolbar);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.internalToolbar);
         setSupportActionBar(mToolbar);
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

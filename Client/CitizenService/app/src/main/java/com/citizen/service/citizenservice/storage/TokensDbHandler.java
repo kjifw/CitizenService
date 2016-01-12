@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TokensDbHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "tokens.db";
+    private static final String DATABASE_NAME = "tokens1.db";
     private static final String TABLE_TOKENS = "tokens";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TOKEN = "token";
@@ -22,7 +22,8 @@ public class TokensDbHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_TOKENS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_TOKEN + " TEXT"
+                + COLUMN_TOKEN + " TEXT,"
+                + COLUMN_TOKEN_TYPE + " TEXT"
                 + ");";
 
         db.execSQL(query);
@@ -37,7 +38,7 @@ public class TokensDbHandler extends SQLiteOpenHelper {
     public void addToken(String token, String tokenType) {
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("DELETE FROM " + TABLE_TOKENS + " WHERE " + COLUMN_TOKEN_TYPE + "=login");
+        db.execSQL("DELETE FROM " + TABLE_TOKENS + " WHERE " + COLUMN_TOKEN_TYPE + "=\"login\"");
 
         ContentValues values = new ContentValues();
 

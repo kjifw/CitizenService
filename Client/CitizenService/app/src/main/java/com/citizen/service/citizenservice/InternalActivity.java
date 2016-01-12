@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -49,13 +50,13 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         InternalPagerAdapter adapter = new InternalPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
 
-        InitializeDrawer();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.internalToolbar);
         if(toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("Citizen Service");
         }
+
+        InitializeDrawer();
 
         dbHandler = new CitiesDbHandler(this, null);
     }
@@ -82,6 +83,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
     }
 
     public void InitializeDrawer(){
+
         ListView listViewDrawer = (ListView) findViewById(R.id.leftDrawer);
         final ArrayAdapter<String> listAdapterDrawer = new ArrayAdapter<String>(
                 this,
@@ -98,6 +100,34 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
                 drawer.closeDrawers();
             }
         });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.internalToolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.internalToolbar);
+        setSupportActionBar(mToolbar);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,  mDrawerLayout, mToolbar,
+                R.string.nav_bar_open, R.string.nav_bar_close)
+        {
+            public void onDrawerClosed(View view)
+            {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+                syncState();
+            }
+
+            public void onDrawerOpened(View drawerView)
+            {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+                syncState();
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        mDrawerToggle.syncState();
     }
 
     public void onSubmitButtonClick(View view) {

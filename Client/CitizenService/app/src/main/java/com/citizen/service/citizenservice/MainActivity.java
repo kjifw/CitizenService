@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.citizen.service.citizenservice.navigation.NavigationService;
+
+public class MainActivity extends AppCompatActivity implements NavigationService {
     ViewPager viewPager;
 
     @Override
@@ -26,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateToRegister(View view) {
         viewPager.setCurrentItem(1);
+    }
+
+    @Override
+    public void goToInternalActivity() {
+        Intent intent = new Intent(this, InternalActivity.class);
+        startActivity(intent);
     }
 
     public class MainPagerAdapter extends FragmentPagerAdapter {

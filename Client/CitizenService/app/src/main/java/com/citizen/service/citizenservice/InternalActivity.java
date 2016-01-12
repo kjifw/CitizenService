@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.citizen.service.citizenservice.storage.CitiesDbHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 

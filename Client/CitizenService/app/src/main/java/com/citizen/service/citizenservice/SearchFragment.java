@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.citizen.service.citizenservice.storage.CitiesDbHandler;
+
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {

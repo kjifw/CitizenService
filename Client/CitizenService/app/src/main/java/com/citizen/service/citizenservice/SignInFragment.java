@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.citizen.service.citizenservice.http.HttpClient;
+import com.citizen.service.citizenservice.navigation.NavigationService;
+
 public class SignInFragment extends Fragment {
 
     @Override
@@ -26,18 +29,21 @@ public class SignInFragment extends Fragment {
                         EditText email = (EditText) view.findViewById(R.id.signInEmail);
                         EditText password = (EditText) view.findViewById(R.id.signInPassword);
 
-                        if (email.getText().toString().matches("")) {
+                        String emailValue = email.getText().toString();
+                        String passwordValue = password.getText().toString();
+
+                        if (emailValue.matches("")) {
                             Toast.makeText(view.getContext(), "Please input email", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
-                        if (password.getText().toString().matches("")) {
+                        if (passwordValue.matches("")) {
                             Toast.makeText(view.getContext(), "Please input password", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
-                        Intent intent = new Intent(getActivity(), InternalActivity.class);
-                        startActivity(intent);
+                        HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
+                        httpClient.Login(emailValue, passwordValue, (NavigationService)getActivity());
                     }
                 }
         );

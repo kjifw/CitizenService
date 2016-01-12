@@ -48,10 +48,8 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
 
-                HttpClient httpClient = new HttpClient(getContext(), ((MainActivity) getActivity()).viewPager,
-                        getResources().getString(R.string.server_url));
-                httpClient.Register(emailValue, passwordValue);
-                //((MainActivity) getActivity()).viewPager.setCurrentItem(0);
+                HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
+                httpClient.Register(emailValue, passwordValue, confirmPasswordValue, ((MainActivity) getActivity()).viewPager);
             }
         });
 

@@ -1,6 +1,8 @@
 package com.citizen.service.citizenservice;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import java.util.List;
 public class InternalActivity extends AppCompatActivity implements ActivityManager{
     ViewPager viewPager;
     CitiesDbHandler dbHandler;
+    LinearLayout imagesView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,27 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         }
 
         dbHandler = new CitiesDbHandler(this, null);
+    }
+
+    public void onSelectPictureButtonClick(View view){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                Uri selectedImageUri = data.getData();
+
+                ImageView item = new ImageView(getApplicationContext());
+                item.setImageURI(selectedImageUri);
+
+                imagesView = (LinearLayout) findViewById(R.id.submitImages);
+                imagesView.addView(item);
+            }
+        }
     }
 
     public void InitializeDrawer(){

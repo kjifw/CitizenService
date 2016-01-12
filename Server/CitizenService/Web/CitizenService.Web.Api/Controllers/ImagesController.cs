@@ -35,7 +35,7 @@
 
             try
             {
-                var fileName = await this.imagesService.StoreImage(provider.Contents[0], HostingEnvironment.MapPath(GlobalConstants.ImagesStoreLocation), advertId, "");
+                var fileName = await this.imagesService.StoreImage(provider.Contents[0], HostingEnvironment.MapPath(GlobalConstants.ImagesStoreLocation), issueId, "");
                 var baseUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
                 var imageUrl = string.Format("{0}/images/{1}", baseUrl, fileName);
 

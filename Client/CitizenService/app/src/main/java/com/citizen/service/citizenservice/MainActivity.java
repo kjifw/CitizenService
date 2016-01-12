@@ -28,49 +28,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(1);
     }
 
-    public void onSignInButtonClick(View view) {
-        EditText email = (EditText) findViewById(R.id.signInEmail);
-        EditText password = (EditText) findViewById(R.id.signInPassword);
-
-//        if (email.getText().toString().matches("")) {
-//            Toast.makeText(getApplicationContext(), "Please input email", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (password.getText().toString().matches("")) {
-//            Toast.makeText(getApplicationContext(), "Please input password", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-
-        Intent intent = new Intent(MainActivity.this, InternalActivity.class);
-        startActivity(intent);
-    }
-
-    public void onRegisterButtonClick(View view) {
-        EditText email = (EditText) findViewById(R.id.registerEmail);
-        EditText password = (EditText) findViewById(R.id.registerPassword);
-        EditText confirmPassword = (EditText) findViewById(R.id.registerRepeatPassword);
-
-        if (email.getText().toString().matches("")) {
-            Toast.makeText(getApplicationContext(), "Please input email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (password.getText().toString().matches("")) {
-            Toast.makeText(getApplicationContext(), "Please input password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (confirmPassword.getText().toString().matches("")) {
-            Toast.makeText(getApplicationContext(), "Please repeat password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Intent intent = new Intent(MainActivity.this, InternalActivity.class);
-        startActivity(intent);
-     }
-
     public class MainPagerAdapter extends FragmentPagerAdapter {
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);

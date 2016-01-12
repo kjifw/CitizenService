@@ -10,6 +10,7 @@
     <string name="link_to_register_text">Not registered? Sign-up</string>
     <string name="title_activity_internal">InternalActivity</string>
     <string name="fragment_issues_title">Most Voted</string>
+    <string name="server_url">http://10.0.3.2:8594/</string>
     <array name="drawer_items">
         <item>Issues</item>
         <item>Search</item>

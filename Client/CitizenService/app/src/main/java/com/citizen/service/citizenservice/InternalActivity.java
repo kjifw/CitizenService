@@ -1,5 +1,6 @@
 package com.citizen.service.citizenservice;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class InternalActivity extends AppCompatActivity implements ActivityManager{
     ViewPager viewPager;
+    CitiesDbHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("Citizen Service");
         }
+
+        dbHandler = new CitiesDbHandler(this, null);
     }
 
     public void InitializeDrawer(){
@@ -102,8 +106,12 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 //            return;
 //        }
 
+
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        // TODO: load information from database and uncomment next row
+
+        // TODO: load information from database and uncomment next row after done
+        dbHandler.addCity(city.getText().toString());
+
         // viewPager.setCurrentItem(3);
     }
 

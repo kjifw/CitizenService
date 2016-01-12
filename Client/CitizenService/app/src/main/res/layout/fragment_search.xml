@@ -12,7 +12,7 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:hint="Filter issues by title"/>
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/searchCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

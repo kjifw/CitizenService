@@ -12,12 +12,22 @@
         android:src="@android:color/holo_red_dark"
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
+    <ImageButton
+        android:id="@+id/detailsButtonDisLike"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:background="@drawable/report"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/detailsTitle"
+        android:layout_alignEnd="@+id/detailsTitle" />
+
     <TextView
         android:id="@+id/detailsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sample text title"
         android:layout_toRightOf="@+id/detailsImageContainer"
+        android:layout_below="@+id/detailsButtonDisLike"
         android:textSize="16sp"
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
@@ -31,6 +41,26 @@
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
     <TextView
+        android:id="@+id/detailsPositiveVotesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Positive Votes"
+        android:layout_toRightOf="@+id/detailsImageContainer"
+        android:layout_below="@+id/detailsAuthor"
+        android:textSize="16sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/detailsNegativeVotesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Negative Votes"
+        android:layout_toRightOf="@+id/detailsImageContainer"
+        android:layout_below="@+id/detailsPositiveVotesCount"
+        android:textSize="16sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <TextView
         android:id="@+id/detailsDesciption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,18 +68,11 @@
         android:layout_below="@+id/detailsImageContainer"
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
-    <RelativeLayout
+    <ImageButton
+        android:id="@+id/detailsButtonLike"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/detailsDesciption">
-        <ImageButton
-            android:id="@+id/detailsButtonLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageButton
-            android:id="@+id/detailsButtonDisLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/detailsButtonLike" />
-    </RelativeLayout>
+        android:layout_height="50dp"
+        android:background="@drawable/vote"
+        android:layout_below="@+id/detailsDesciption"/>
+
 </RelativeLayout>

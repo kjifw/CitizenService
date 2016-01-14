@@ -29,6 +29,26 @@
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
     <TextView
+        android:id="@+id/detailsPositiveVotesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Positive Votes"
+        android:layout_toRightOf="@+id/basicDetailsImageContainer"
+        android:layout_below="@+id/basicDetailsAuthor"
+        android:textSize="16sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/detailsNegativeVotesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Negative Votes"
+        android:layout_toRightOf="@+id/basicDetailsImageContainer"
+        android:layout_below="@+id/detailsPositiveVotesCount"
+        android:textSize="16sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <TextView
         android:id="@+id/basicDetailsDesciption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.citizen.service.citizenservice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -106,11 +107,15 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
         listViewDrawer.setAdapter(listAdapterDrawer);
 
+        final Context myContext = this;
+
         listViewDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 4) {
-                    takePhoto(view);
+                    //takePhoto(view);
+                    Intent intent = new Intent(myContext, CameraActivity.class);
+                    startActivity(intent);
                 } else {
                     viewPager.setCurrentItem(position);
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -214,4 +219,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         }
     }
 }
+
+
 

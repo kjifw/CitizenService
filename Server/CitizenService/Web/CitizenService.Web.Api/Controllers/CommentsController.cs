@@ -4,6 +4,7 @@
 
     using Services.Data.Contracts;
 
+    [Authorize]
     public class CommentsController : ApiController
     {
         private ICommentsService commentsService;

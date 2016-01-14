@@ -11,6 +11,7 @@
     using Infrastructure.Validation;
     using Models.Issues;
     
+    [Authorize]
     public class IssuesController : ApiController
     {
         private IIssuesService issuesService;
@@ -26,7 +27,7 @@
             var userId = this.User.Identity.GetUserId();
 
             var newIssue = this.issuesService.CreateIssue(userId, createAdvertRequestModel.City, createAdvertRequestModel.Title,
-                createAdvertRequestModel.Description, DateTime.UtcNow);
+                createAdvertRequestModel.Description, createAdvertRequestModel.IsAnonymous, DateTime.UtcNow);
 
             var issueResult = this.issuesService
                 .GetIssueDetails(newIssue.Id)

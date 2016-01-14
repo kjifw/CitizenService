@@ -23,7 +23,7 @@
         }
 
         [Route("api/images/{issueId}")]
-        public async Task<IHttpActionResult> Post(int issueId, string longitude, string latitude)
+        public async Task<IHttpActionResult> Post(int issueId)
         {
             if (Request.Content.IsMimeMultipartContent() == false)
             {
@@ -48,7 +48,7 @@
                 return this.BadRequest();
             }
 
-            return this.Created(string.Format("/api/images/{0}", issueId, longitude, latitude), "");
+            return this.Created(string.Format("/api/images/{0}", issueId), "");
         }
     }
 }

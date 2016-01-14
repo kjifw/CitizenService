@@ -7,7 +7,7 @@
     
     public interface IIssuesService
     {
-        Issue CreateIssue(string userId, string city, string title, string description, DateTime publishDate);
+        Issue CreateIssue(string userId, string city, string title, string description, bool isAnonymous, DateTime publishDate);
 
         IQueryable<Issue> GetIssueDetails(int id);
 

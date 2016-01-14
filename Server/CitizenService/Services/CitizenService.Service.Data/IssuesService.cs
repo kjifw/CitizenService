@@ -46,7 +46,7 @@
             return true;
         }
 
-        public Issue CreateIssue(string userId, string city, string title, string description, DateTime publishDate)
+        public Issue CreateIssue(string userId, string city, string title, string description, bool isAnonymous, DateTime publishDate)
         {
             var issue = new Issue()
             {
@@ -54,6 +54,7 @@
                 City = city,
                 Title = title,
                 Description = description,
+                IsAnonymous = isAnonymous,
                 PublishDate = publishDate
             };
 

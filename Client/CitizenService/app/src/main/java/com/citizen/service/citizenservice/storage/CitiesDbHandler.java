@@ -13,7 +13,7 @@ public class CitiesDbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "cities.db";
     private static final String TABLE_CITIES = "cities";
     private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_CITY = "city";
+    private static final String COLUMN_CITITES = "cities";
 
     public CitiesDbHandler(Context context, SQLiteDatabase.CursorFactory factory){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -23,7 +23,7 @@ public class CitiesDbHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_CITIES + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_CITY + " TEXT"
+                + COLUMN_CITITES + " TEXT"
                 + ");";
 
         db.execSQL(query);
@@ -42,7 +42,7 @@ public class CitiesDbHandler extends SQLiteOpenHelper {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues values = new ContentValues();
 
-            values.put(COLUMN_CITY, city);
+            values.put(COLUMN_CITITES, city);
             db.insert(TABLE_CITIES, null, values);
 
             db.close();
@@ -59,8 +59,8 @@ public class CitiesDbHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while(!cursor.isAfterLast()){
-            if (cursor.getString(cursor.getColumnIndex(COLUMN_CITY)) != null){
-                String item = cursor.getString(cursor.getColumnIndex(COLUMN_CITY));
+            if (cursor.getString(cursor.getColumnIndex(COLUMN_CITITES)) != null){
+                String item = cursor.getString(cursor.getColumnIndex(COLUMN_CITITES));
                 cities.add(item);
             }
 

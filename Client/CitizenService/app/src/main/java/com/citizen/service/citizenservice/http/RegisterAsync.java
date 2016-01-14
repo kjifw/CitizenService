@@ -37,6 +37,7 @@ class RegisterAsync extends AsyncTask<String, Void, Boolean> {
             urlConnection.setDoInput(true);
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             urlConnection.setRequestProperty("Charset", "utf-8");
             urlConnection.setRequestProperty("Host", "localhost");
@@ -46,8 +47,6 @@ class RegisterAsync extends AsyncTask<String, Void, Boolean> {
             outputStream.flush();
             outputStream.close();
             urlConnection.connect();
-
-            Log.d("RESPONSE CODE", urlConnection.getResponseMessage());
 
             if(urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 return true;

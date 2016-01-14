@@ -25,12 +25,10 @@ public class ItemDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Bundle args = getArguments();
-
         title = (TextView) getActivity().findViewById(R.id.detailsTitle);
         author = (TextView) getActivity().findViewById(R.id.detailsAuthor);
         description = (TextView) getActivity().findViewById(R.id.detailsDesciption);
         image = (ImageView) getActivity().findViewById(R.id.detailsImageContainer);
-
         if (args.getString("currentFragment") == "Issues") {
             IssueListItemModel model = ((InternalActivity) getActivity()).issuesList.get(args.getInt("currentItem"));
             setData(model);

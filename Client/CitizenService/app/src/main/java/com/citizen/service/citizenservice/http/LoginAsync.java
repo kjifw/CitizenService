@@ -59,11 +59,10 @@ public class LoginAsync extends AsyncTask<String, Void, Boolean> {
                 response.append(line);
             }
 
-            TokensDbHandler db = new TokensDbHandler(this.context, null);
-            JSONObject json = new JSONObject(response.toString());
-            db.addToken(json.getString("access_token"), "login");
-
             if(urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                JSONObject json = new JSONObject(response.toString());
+                TokensDbHandler db = new TokensDbHandler(this.context, null);
+                db.addToken(json.getString("access_token"), "login");
                 return true;
             }
 

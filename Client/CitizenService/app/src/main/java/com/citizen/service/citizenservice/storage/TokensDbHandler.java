@@ -2,6 +2,7 @@ package com.citizen.service.citizenservice.storage;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -40,6 +41,7 @@ public class TokensDbHandler extends SQLiteOpenHelper {
 
         db.execSQL("DELETE FROM " + TABLE_TOKENS + " WHERE " + COLUMN_TOKEN_TYPE + "=\"login\"");
 
+
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_TOKEN, token);
@@ -47,5 +49,16 @@ public class TokensDbHandler extends SQLiteOpenHelper {
         db.insert(TABLE_TOKENS, null, values);
 
         db.close();
+    }
+
+    public String getToken(String tokenType) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = { COLUMN_TOKEN };
+        Cursor findEntry = db.query(TABLE_TOKENS, columns, COLUMN_TOKEN_TYPE + "=?", new String[]{ tokenType }, null, null, null);
+
+        findEntry.moveToFirst();
+        db.close();
+
+        return findEntry.getString(0);
     }
 }

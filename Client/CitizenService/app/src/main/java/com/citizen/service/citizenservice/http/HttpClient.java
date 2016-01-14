@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import com.citizen.service.citizenservice.R;
 import com.citizen.service.citizenservice.navigation.NavigationService;
+import com.citizen.service.citizenservice.storage.TokensDbHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -19,6 +21,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class HttpClient {
 
@@ -38,5 +42,17 @@ public class HttpClient {
     public void Login(String username, String password, NavigationService navigationService) {
         String loginUrl = String.format("%s/token", this.serverUrl);
         new LoginAsync(context, navigationService, loginUrl).execute(username, password);
+    }
+
+    public void UploadImage(String filePath, int issueId) {
+
+        TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
+        StringBuilder url = new StringBuilder();
+        url.append(this.serverUrl);
+        url.append("/");
+        url.append(String.valueOf(issueId));
+
+        ImageUpload imageUpload = new ImageUpload(url, "http", filePath, tokensDbHandler.getToken("login"));
+        imageUpload.upload();
     }
 }

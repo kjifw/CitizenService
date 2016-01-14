@@ -157,14 +157,4 @@ public class CameraActivity extends Activity{
             camera = null;
         }
     }
-
-    public void onSelectPictureButtonClick(View view){
-
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
-
-        Intent chooserIntent = Intent.createChooser(pickIntent, "Select Image");
-
-        startActivityForResult(chooserIntent, 1);
-    }
 }

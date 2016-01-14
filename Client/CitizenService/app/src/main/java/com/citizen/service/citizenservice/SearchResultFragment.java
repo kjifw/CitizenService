@@ -59,8 +59,8 @@ public class SearchResultFragment extends ListFragment {
 
         ((InternalActivity) getActivity()).setDetailsInformation(position, 6);
 
-         ViewPager pager = ((InternalActivity) getActivity()).viewPager;
-         pager.setCurrentItem(6);
+        ViewPager pager = ((InternalActivity) getActivity()).viewPager;
+        pager.setCurrentItem(6);
     }
 
     @Override

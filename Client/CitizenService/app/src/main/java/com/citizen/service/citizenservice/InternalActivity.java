@@ -2,8 +2,11 @@ package com.citizen.service.citizenservice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,8 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,10 +24,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 import com.citizen.service.citizenservice.storage.CitiesDbHandler;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,28 +83,51 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         searchResultList = new ArrayList<>();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.internal_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.signOutButton) {
+            Intent logout = new Intent(InternalActivity.this, MainActivity.class);
+            InternalActivity.this.startActivity(logout);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private final static int LOAD_PHOTO = 42;
+
     public void onSelectPictureButtonClick(View view){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 0);
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(pickIntent, "Select Image");
+
+        startActivityForResult(chooserIntent, LOAD_PHOTO);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
             switch (requestCode) {
-                case 0:
+                case LOAD_PHOTO:
                     Uri selectedImageUri = data.getData();
-
                     ImageView item = new ImageView(getApplicationContext());
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    lp.setMargins(10, 0, 10, 0);
+                    item.setLayoutParams(lp);
                     item.setImageURI(selectedImageUri);
-
-                    imagesView = (LinearLayout) findViewById(R.id.submitImages);
+                    item.setTag(R.integer.photo_path, getRealPathFromURI(selectedImageUri));
+                    imagesView = (LinearLayout) findViewById(R.id.submit_images);
                     imagesView.addView(item);
-                    break;
-                case 1:
-
-                    // TODO: save photo to gallery and tell user picture is taken successfully
                     break;
             }
         }
@@ -117,6 +149,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 4) {
+                    //takePhoto(view);
                     Intent intent = new Intent(myContext, CameraActivity.class);
                     startActivity(intent);
                 } else {
@@ -156,8 +189,8 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
     }
 
     public void onSubmitButtonClick(View view) {
-        EditText title = (EditText) findViewById(R.id.submitTitle);
-        EditText description = (EditText) findViewById(R.id.submitDescription);
+   //     EditText title = (EditText) findViewById(R.id.submitTitle);
+   //     EditText description = (EditText) findViewById(R.id.submitDescription);
 
 //        if (title.getText().toString().matches("")) {
 //            Toast.makeText(getApplicationContext(), "Title cannot be empty.", Toast.LENGTH_SHORT).show();
@@ -168,7 +201,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 //            Toast.makeText(getApplicationContext(), "Decription cannot be empty.", Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-
 
 
         Toast.makeText(getApplicationContext(), "Submit Successful", Toast.LENGTH_SHORT).show();
@@ -216,26 +248,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         this.bundle.putInt("currentItem", itemId);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.internal_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.signOutButton) {
-            Intent logout = new Intent(InternalActivity.this, MainActivity.class);
-            InternalActivity.this.startActivity(logout);
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public class InternalPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragments;
         private Bundle bundle;
@@ -257,6 +269,13 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         public int getCount() {
             return this.fragments.size();
         }
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
 }
 

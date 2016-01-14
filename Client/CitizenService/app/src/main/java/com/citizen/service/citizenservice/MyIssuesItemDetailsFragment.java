@@ -9,37 +9,35 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.citizen.service.citizenservice.models.IssueListItemModel;
+
 public class MyIssuesItemDetailsFragment extends Fragment {
-//    private TextView title;
-//    private TextView author;
-//    private TextView description;
-//    private ImageView image;
+    private TextView title;
+    private TextView author;
+    private TextView description;
+    private ImageView image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_issues_item_details, container, false);
-
-//        title = (TextView) getActivity().findViewById(R.id.detailsTitle);
-//        author = (TextView) getActivity().findViewById(R.id.detailsAuthor);
-//        description = (TextView) getActivity().findViewById(R.id.detailsDesciption);
-//        image = (ImageView) getActivity().findViewById(R.id.detailsImageContainer);
-
         return  view;
     }
 
-//    public void setItemTitle(String title){
-//        this.title.setText(title);
-//    }
-//
-//    public void setItemAuthor(String author){
-//        this.author.setText(author);
-//    }
-//
-//    public void setItemDescription(String description){
-//        this.description.setText(description);
-//    }
-//
-//    public void setItemImage(String src){
-//        this.image.setImageURI(Uri.parse(src));
-//    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        if (args.getString("currentFragment") == "MyIssues") {
+            IssueListItemModel model = ((InternalActivity) getActivity()).myIssuesList.get(args.getInt("currentItem"));
+
+            title = (TextView) getActivity().findViewById(R.id.basicDetailsTitle);
+            author = (TextView) getActivity().findViewById(R.id.basicDetailsAuthor);
+            description = (TextView) getActivity().findViewById(R.id.basicDetailsDesciption);
+            image = (ImageView) getActivity().findViewById(R.id.basicDetailsImageContainer);
+
+            title.setText(model.getTitle());
+            author.setText(model.getAuthor());
+            description.setText(model.getDescription());
+            image.setImageURI(model.getImage());
+        }
+    }
 }

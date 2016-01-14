@@ -31,20 +31,22 @@ public class IssuesFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        List<IssueListItemModel> list = ((InternalActivity) getActivity()).issuesList;
+        list.clear();
+
         // For testing purposes - to be replaced
         Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                 "://" + getResources().getResourcePackageName(R.drawable.item)
                 + '/' + getResources().getResourceTypeName(R.drawable.item)
                 + '/' + getResources().getResourceEntryName(R.drawable.item));
 
-        List<IssueListItemModel> list = new ArrayList<IssueListItemModel>();
-        list.add(new IssueListItemModel(imageUri, "title0", "votes0"));
-        list.add(new IssueListItemModel(imageUri, "title1", "votes1"));
-        list.add(new IssueListItemModel(imageUri, "title2", "votes2"));
-        list.add(new IssueListItemModel(imageUri, "title3", "votes3"));
-        list.add(new IssueListItemModel(imageUri, "title4", "votes4"));
-        list.add(new IssueListItemModel(imageUri, "title5", "votes5"));
-        list.add(new IssueListItemModel(imageUri, "title6", "votes6"));
+        list.add(new IssueListItemModel(imageUri, "title0", "votes0", "description0", "author0"));
+        list.add(new IssueListItemModel(imageUri, "title1", "votes1", "description1", "author1"));
+        list.add(new IssueListItemModel(imageUri, "title2", "votes2", "description2", "author2"));
+        list.add(new IssueListItemModel(imageUri, "title3", "votes3", "description3", "author3"));
+        list.add(new IssueListItemModel(imageUri, "title4", "votes4", "description4", "author4"));
+        list.add(new IssueListItemModel(imageUri, "title5", "votes5", "description5", "author5"));
+        list.add(new IssueListItemModel(imageUri, "title6", "votes6", "description6", "author6"));
 
         ListAdapter adapter = new ListItemAdapter(getActivity(), list);
 
@@ -55,9 +57,11 @@ public class IssuesFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Toast.makeText(getActivity(), "item clicked" + position, Toast.LENGTH_SHORT).show();
-        // transfer data to details page
-        // ViewPager pager = ((InternalActivity) getActivity()).viewPager;
-        // pager.setCurrentItem(6);
+
+        ((InternalActivity) getActivity()).setDetailsInformation(position, 4);
+
+        ViewPager pager = ((InternalActivity) getActivity()).viewPager;
+        pager.setCurrentItem(6);
     }
 
     @Override

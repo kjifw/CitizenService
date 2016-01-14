@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.citizen.service.citizenservice.models.IssueListItemModel;
 import com.citizen.service.citizenservice.storage.CitiesDbHandler;
 
 import java.util.ArrayList;
@@ -32,6 +33,11 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
     ViewPager viewPager;
     CitiesDbHandler dbHandler;
     LinearLayout imagesView;
+    List<IssueListItemModel> issuesList;
+    List<IssueListItemModel> myIssuesList;
+    List<IssueListItemModel> searchResultList;
+    InternalPagerAdapter adapter;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,8 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         fragments.add(new MyIssuesItemDetailsFragment());
         fragments.add(new ItemDetailsFragment());
 
-        InternalPagerAdapter adapter = new InternalPagerAdapter(getSupportFragmentManager(), fragments);
+        bundle = new Bundle();
+        adapter = new InternalPagerAdapter(getSupportFragmentManager(), fragments, bundle);
         viewPager.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.internalToolbar);
@@ -61,13 +68,10 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         InitializeDrawer();
 
         dbHandler = new CitiesDbHandler(this, null);
-    }
 
-    public void takePhoto(View view){
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, 1);
-        }
+        issuesList = new ArrayList<>();
+        myIssuesList = new ArrayList<>();
+        searchResultList = new ArrayList<>();
     }
 
     public void onSelectPictureButtonClick(View view){
@@ -113,7 +117,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 4) {
-                    //takePhoto(view);
                     Intent intent = new Intent(myContext, CameraActivity.class);
                     startActivity(intent);
                 } else {
@@ -192,25 +195,42 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         // TODO: load information from database and uncomment next row after done
         dbHandler.addCity(city.getText().toString());
 
-        // viewPager.setCurrentItem(3);
+        viewPager.setCurrentItem(4);
     }
 
     @Override
-    public void setDetailsInformation(int itemId) {
-        // TODO: load information for the selected item from ListView into details page
+    public void setDetailsInformation(int itemId, int fragmentId) {
+        String key = "currentFragment";
+        if (fragmentId == 4) {
+            this.bundle.putString(key, "Issues");
+        }
+
+        if (fragmentId == 5) {
+            this.bundle.putString(key, "MyIssues");
+        }
+
+        if (fragmentId == 6) {
+            this.bundle.putString(key, "SearchResult");
+        }
+
+        this.bundle.putInt("currentItem", itemId);
     }
 
     public class InternalPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragments;
+        private Bundle bundle;
 
-        public InternalPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+        public InternalPagerAdapter(FragmentManager fm, List<Fragment> fragments, Bundle bundle) {
             super(fm);
             this.fragments = fragments;
+            this.bundle = bundle;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return this.fragments.get(position);
+            Fragment item =  this.fragments.get(position);
+            item.setArguments(bundle);
+            return item;
         }
 
         @Override

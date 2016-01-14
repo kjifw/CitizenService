@@ -2,7 +2,37 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/basicDetailsImageContainer"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:src="@android:color/holo_red_dark"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
 
-   <include layout="@layout/basic_item_details"/>
+    <TextView
+        android:id="@+id/basicDetailsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sample text title"
+        android:layout_toRightOf="@+id/basicDetailsImageContainer"
+        android:textSize="16sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/basicDetailsAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sample text author"
+        android:layout_toRightOf="@+id/basicDetailsImageContainer"
+        android:layout_below="@+id/basicDetailsTitle"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/basicDetailsDesciption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sample description"
+        android:layout_below="@+id/basicDetailsImageContainer"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
 </RelativeLayout>

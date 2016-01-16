@@ -32,21 +32,6 @@ public class SearchResultFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         List<IssueListItemModel> list = ((InternalActivity) getActivity()).searchResultList;
-        list.clear();
-
-        // For testing purposes - to be replaced
-        Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-                "://" + getResources().getResourcePackageName(R.drawable.item)
-                + '/' + getResources().getResourceTypeName(R.drawable.item)
-                + '/' + getResources().getResourceEntryName(R.drawable.item));
-
-        list.add(new IssueListItemModel(imageUri, "searchtitle0", "votes0", "description0", "author0"));
-        list.add(new IssueListItemModel(imageUri, "searchtitle1", "votes1", "description1", "author1"));
-        list.add(new IssueListItemModel(imageUri, "searchtitle2", "votes2", "description2", "author2"));
-        list.add(new IssueListItemModel(imageUri, "searchtitle3", "votes3", "description3", "author3"));
-        list.add(new IssueListItemModel(imageUri, "searchtitle4", "votes4", "description4", "author4"));
-        list.add(new IssueListItemModel(imageUri, "searchtitle5", "votes5", "description5", "author5"));
-        list.add(new IssueListItemModel(imageUri, "searchtitle6", "votes6", "description6", "author6"));
 
         ListAdapter adapter = new ListItemAdapter(getActivity(), list);
         setListAdapter(adapter);

@@ -12,14 +12,17 @@
         android:src="@android:color/holo_red_dark"
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
-    <ImageButton
-        android:id="@+id/detailsButtonDisLike"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:background="@drawable/report"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/detailsTitle"
-        android:layout_alignEnd="@+id/detailsTitle" />
+    <TextView
+        android:id="@+id/detailsButtonReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hold to report as incorrect"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:layout_toRightOf="@+id/detailsImageContainer"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:clickable="true"/>
 
     <TextView
         android:id="@+id/detailsTitle"
@@ -27,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Sample text title"
         android:layout_toRightOf="@+id/detailsImageContainer"
-        android:layout_below="@+id/detailsButtonDisLike"
+        android:layout_below="@+id/detailsButtonReport"
         android:textSize="16sp"
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
@@ -69,7 +72,7 @@
         android:layout_margin="@dimen/activity_horizontal_margin"/>
 
     <ImageButton
-        android:id="@+id/detailsButtonLike"
+        android:id="@+id/detailsButtonVote"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/vote"

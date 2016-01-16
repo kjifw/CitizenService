@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.citizen.service.citizenservice.contracts.ISearchResult;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 import com.citizen.service.citizenservice.storage.CitiesDbHandler;
 
@@ -38,7 +39,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InternalActivity extends AppCompatActivity implements ActivityManager{
+public class InternalActivity extends AppCompatActivity implements ActivityManager, ISearchResult{
     ViewPager viewPager;
     CitiesDbHandler dbHandler;
     LinearLayout imagesView;
@@ -149,7 +150,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 4) {
-                    //takePhoto(view);
                     Intent intent = new Intent(myContext, CameraActivity.class);
                     startActivity(intent);
                 } else {
@@ -188,25 +188,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         mDrawerToggle.syncState();
     }
 
-    public void onSubmitButtonClick(View view) {
-   //     EditText title = (EditText) findViewById(R.id.submitTitle);
-   //     EditText description = (EditText) findViewById(R.id.submitDescription);
-
-//        if (title.getText().toString().matches("")) {
-//            Toast.makeText(getApplicationContext(), "Title cannot be empty.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (description.getText().toString().matches("")) {
-//            Toast.makeText(getApplicationContext(), "Decription cannot be empty.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-
-        Toast.makeText(getApplicationContext(), "Submit Successful", Toast.LENGTH_SHORT).show();
-        viewPager.setCurrentItem(0);
-    }
-
     public void onSearchButtonClick(View view) {
         EditText title = (EditText) findViewById(R.id.searchTitle);
         EditText city = (EditText) findViewById(R.id.searchCity);
@@ -222,10 +203,8 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 //        }
 
 
-        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
-        // TODO: load information from database and uncomment next row after done
-        dbHandler.addCity(city.getText().toString());
+
 
         viewPager.setCurrentItem(4);
     }
@@ -246,6 +225,12 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         }
 
         this.bundle.putInt("currentItem", itemId);
+    }
+
+    @Override
+    public void setResultData(List<IssueListItemModel> models) {
+        searchResultList.clear();
+        searchResultList.addAll(models);
     }
 
     public class InternalPagerAdapter extends FragmentPagerAdapter {

@@ -99,6 +99,8 @@ public class SubmitFragment extends Fragment {
                 String url = getResources().getString(R.string.server_url);
                 PublishIssue publishIssue = new PublishIssue(getContext(), url, tokensDbHandler.getToken("login"));
                 publishIssue.execute(publishIssueData);
+
+                ((InternalActivity) getActivity()).viewPager.setCurrentItem(0);
             }
         });
 

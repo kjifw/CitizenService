@@ -56,8 +56,11 @@ public class IssuesFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
         Toast.makeText(getActivity(), "item clicked" + position, Toast.LENGTH_SHORT).show();
+
         ((InternalActivity) getActivity()).setDetailsInformation(position, 4);
+
         ViewPager pager = ((InternalActivity) getActivity()).viewPager;
         pager.setCurrentItem(6);
     }

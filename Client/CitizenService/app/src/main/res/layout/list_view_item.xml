@@ -3,32 +3,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip">
+    android:padding="6dip"
+    android:background="@drawable/list_item_style">
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="100dp"
+        android:layout_width="70dp"
         android:layout_height="fill_parent"
         android:layout_marginRight="6dip"
         android:src="@drawable/item" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dip"
-        android:layout_weight="1"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
         <TextView
             android:id="@+id/titleText"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            />
+            android:gravity="center_vertical"/>
         <TextView
             android:id="@+id/positiveVotesCount"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            />
+            android:singleLine="true"/>
     </LinearLayout>
 </LinearLayout>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/DefaultDimensions">
 
     <Switch
         android:id="@+id/submit_is_anonymous"
@@ -10,44 +9,40 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:text="Anonymous" />
+        android:text="@string/switch_text" />
 
     <EditText
         android:id="@+id/submit_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_below="@+id/submit_is_anonymous"
-        android:hint="Input Title"/>
+        android:hint="@string/submit_title_hint"
+        style="@style/DefaultWrapDimensions"/>
 
     <EditText
         android:id="@+id/submit_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/submit_title"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="Input Description"
+        android:hint="@string/submit_description_hint"
         android:inputType="textMultiLine"
-        android:maxHeight="180dp"/>
+        android:maxHeight="180dp"
+        style="@style/DefaultWrapDimensions"/>
     
     <EditText
         android:id="@+id/submit_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="Double tap to auto detect city"
-        android:layout_below="@+id/submit_description"/>
+        android:hint="@string/submit_city_tap_hint"
+        android:layout_below="@+id/submit_description"
+        style="@style/DefaultWrapDimensions"/>
 
     <Button
         android:id="@+id/submitSelectPictureButton"
-        android:text="Select Picture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:text="@string/select_picture_button"
         android:layout_below="@+id/submit_city"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:onClick="onSelectPictureButtonClick"/>
+        android:onClick="onSelectPictureButtonClick"
+        style="@style/DefaultButtonStyle"/>
 
     <HorizontalScrollView
         android:id="@+id/submit_images_horizontal_scroll_view"
@@ -67,10 +62,9 @@
 
     <Button
         android:id="@+id/submit_button"
-        android:text="Submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
         android:layout_below="@+id/submit_images_horizontal_scroll_view"
-        android:layout_margin="@dimen/activity_horizontal_margin" />
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultButtonStyle"/>
 
 </RelativeLayout>

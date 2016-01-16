@@ -6,30 +6,28 @@
 
     <EditText
         android:id="@+id/signInEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/sign_in_email"/>
+        android:hint="@string/sign_in_email"
+        style="@style/DefaultWrapDimensions"/>
 
     <EditText
         android:id="@+id/signInPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_below="@+id/signInEmail"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/sign_in_password"/>
+        android:hint="@string/sign_in_password"
+        style="@style/DefaultWrapDimensions"/>
 
     <Button
         android:id="@+id/signInButton"
         android:text="@string/sign_in_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/signInPassword"
-        android:layout_margin="@dimen/activity_horizontal_margin" />
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultButtonStyle"
+        />
 
     <TextView
         android:id="@+id/linkToRegister"

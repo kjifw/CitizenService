@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/DefaultDimensions"
     android:fitsSystemWindows="true"
     tools:context="com.citizen.service.citizenservice.MainActivity">
 
@@ -15,25 +14,17 @@
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/internalToolbar">
+        android:layout_below="@+id/internalToolbar"
+        style="@style/DefaultDimensions">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/internalViewPager"
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            style="@style/DefaultDimensions">
         </android.support.v4.view.ViewPager>
 
         <ListView
             android:id="@+id/leftDrawer"
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#888888"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp" />
+            style="@style/DrawerStyle"/>
     </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

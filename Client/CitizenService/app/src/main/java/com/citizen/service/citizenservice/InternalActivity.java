@@ -72,7 +72,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         Toolbar toolbar = (Toolbar) findViewById(R.id.internalToolbar);
         if(toolbar != null) {
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle("Citizen Service");
+            getSupportActionBar().setTitle(R.string.app_name);
         }
 
         InitializeDrawer();
@@ -97,6 +97,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         if (id == R.id.signOutButton) {
             Intent logout = new Intent(InternalActivity.this, MainActivity.class);
             InternalActivity.this.startActivity(logout);
+            finish();
 
             return true;
         }
@@ -118,8 +119,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case LOAD_PHOTO:
+           if(requestCode == LOAD_PHOTO) {
                     Uri selectedImageUri = data.getData();
                     ImageView item = new ImageView(getApplicationContext());
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -129,7 +129,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
                     item.setTag(R.integer.photo_path, getRealPathFromURI(selectedImageUri));
                     imagesView = (LinearLayout) findViewById(R.id.submit_images);
                     imagesView.addView(item);
-                    break;
             }
         }
     }

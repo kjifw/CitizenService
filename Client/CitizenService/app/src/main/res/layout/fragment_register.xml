@@ -1,44 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/DefaultDimensions">
 
     <EditText
         android:id="@+id/registerEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/register_email"/>
+        android:hint="@string/register_email"
+        style="@style/DefaultWrapDimensions"/>
 
     <EditText
         android:id="@+id/registerPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_below="@+id/registerEmail"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/register_password"/>
+        android:hint="@string/register_password"
+        style="@style/DefaultWrapDimensions"/>
 
     <EditText
         android:id="@+id/registerRepeatPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_below="@+id/registerPassword"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:hint="@string/register_repeat_password"/>
+        android:hint="@string/register_repeat_password"
+        style="@style/DefaultWrapDimensions"/>
 
     <Button
         android:id="@+id/registerButton"
         android:text="@string/register_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/registerRepeatPassword"
-        android:layout_margin="@dimen/activity_horizontal_margin" />
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultButtonStyle"/>
 
 </RelativeLayout>

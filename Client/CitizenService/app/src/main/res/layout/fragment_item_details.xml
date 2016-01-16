@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    style="@style/DefaultDimensions">
 
     <ImageView
         android:id="@+id/detailsImageContainer"
@@ -14,62 +12,56 @@
 
     <TextView
         android:id="@+id/detailsButtonReport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Hold to report as incorrect"
         android:textSize="15sp"
         android:gravity="right"
         android:layout_toRightOf="@+id/detailsImageContainer"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:clickable="true"/>
+        android:clickable="true"
+        style="@style/DefaultWrapDimensions"/>
 
     <TextView
         android:id="@+id/detailsTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Sample text title"
         android:layout_toRightOf="@+id/detailsImageContainer"
         android:layout_below="@+id/detailsButtonReport"
         android:textSize="16sp"
-        android:layout_margin="@dimen/activity_horizontal_margin"/>
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultWrapDimensions"/>
 
     <TextView
         android:id="@+id/detailsAuthor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Sample text author"
         android:layout_toRightOf="@+id/detailsImageContainer"
         android:layout_below="@+id/detailsTitle"
-        android:layout_margin="@dimen/activity_horizontal_margin"/>
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultWrapDimensions"/>
 
     <TextView
         android:id="@+id/detailsPositiveVotesCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Positive Votes"
         android:layout_toRightOf="@+id/detailsImageContainer"
         android:layout_below="@+id/detailsAuthor"
         android:textSize="16sp"
-        android:layout_margin="@dimen/activity_horizontal_margin"/>
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultWrapDimensions"/>
 
     <TextView
         android:id="@+id/detailsNegativeVotesCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Negative Votes"
         android:layout_toRightOf="@+id/detailsImageContainer"
         android:layout_below="@+id/detailsPositiveVotesCount"
         android:textSize="16sp"
-        android:layout_margin="@dimen/activity_horizontal_margin"/>
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultWrapDimensions"/>
 
     <TextView
         android:id="@+id/detailsDesciption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Sample description"
         android:layout_below="@+id/detailsImageContainer"
-        android:layout_margin="@dimen/activity_horizontal_margin"/>
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultWrapDimensions"/>
 
     <ImageButton
         android:id="@+id/detailsButtonVote"

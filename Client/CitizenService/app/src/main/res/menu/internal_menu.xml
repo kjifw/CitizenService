@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.citizen.service.citizenservice.InternalActivity">
+    tools:context="com.citizen.service.citizenservie.InternalActivity"
+    tools:override="true">
 
     <item
         android:id="@+id/signOutButton"
         android:orderInCategory="100"
-        android:title="Sign Out"
+        android:title="@string/sign_out_button"
         app:showAsAction="never"/>
 </menu>

@@ -2,8 +2,12 @@ package com.citizen.service.citizenservice.models;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 public class IssueListItemModel {
+
     private String imageUrl;
+    private ArrayList<String> imagesUrls = new ArrayList<>();
     private String title;
     private String votesCount;
     private String description;
@@ -15,6 +19,10 @@ public class IssueListItemModel {
         this.votesCount = votesCount;
         this.description = description;
         this.author = author;
+    }
+
+    public void addImageUrl(String imageUrl) {
+        this.imagesUrls.add(imageUrl);
     }
 
     public String getImage() {

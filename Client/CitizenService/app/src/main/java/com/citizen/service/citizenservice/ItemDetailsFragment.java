@@ -1,7 +1,6 @@
 package com.citizen.service.citizenservice;
 
 import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.GestureDetector;
@@ -75,6 +74,5 @@ public class ItemDetailsFragment extends Fragment {
         title.setText(model.getTitle());
         author.setText(model.getAuthor());
         description.setText(model.getDescription());
-        //image.setImageURI(Uri.parse(model.getImage()));
     }
 }

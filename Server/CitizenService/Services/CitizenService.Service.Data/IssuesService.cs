@@ -89,11 +89,11 @@
                 .Where(i => i.Id == id);
         }
 
-        public IQueryable<Issue> GetIssuesByFilters(string city)
+        public IQueryable<Issue> GetIssuesByFilters(string city, string title)
         {
             return this.issues
                 .All()
-                .Where(i => i.City == city);
+                .Where(i => i.City == city && i.Title.Contains(title));
         }
 
         public IQueryable<Issue> GetIssuesOfUser(string userId)
@@ -147,7 +147,7 @@
             return true;
         }
 
-        public bool UpVoteIssue(int id, string userId)
+        public int UpVoteIssue(int id, string userId)
         {
             var issue = this.issues
                 .All()
@@ -156,7 +156,7 @@
 
             if (issue == null)
             {
-                return false;
+                throw new InvalidOperationException();
             }
 
             var user = this.users
@@ -164,13 +164,14 @@
                 .Where(u => u.Id == userId)
                 .FirstOrDefault();
 
+            issue.UpVotesCount += 1;
             issue.UpVotedUsers.Add(user);
             this.issues.SaveChanges();
 
             user.UpVotedIssues.Add(issue);
             this.users.SaveChanges();
 
-            return true;
+            return issue.UpVotesCount;
         }
     }
 }

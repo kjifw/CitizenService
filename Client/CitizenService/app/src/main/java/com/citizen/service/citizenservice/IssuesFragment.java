@@ -1,8 +1,6 @@
 package com.citizen.service.citizenservice;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
@@ -16,13 +14,13 @@ import android.widget.Toast;
 import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.http.HttpClient;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IssuesFragment extends ListFragment {
     ActivityManager manager;
+
+    private final static int NUMBER_OF_ISSUES_TO_LOAD = 10;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class IssuesFragment extends ListFragment {
 
             areIssuesLoaded = true;
             HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
-            httpClient.LoadTopVotedIssues((ITopVotedResult) getActivity(), 4);
+            httpClient.LoadTopVotedIssues((ITopVotedResult) getActivity(), NUMBER_OF_ISSUES_TO_LOAD);
         }
     }
 

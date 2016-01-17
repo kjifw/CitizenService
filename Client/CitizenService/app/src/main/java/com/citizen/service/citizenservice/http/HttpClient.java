@@ -44,12 +44,12 @@ public class HttpClient {
     public void LoadTopVotedIssues(ITopVotedResult topVotedResult, int count) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
         String loadTopVotedIssuesUrl = String.format("%sapi/issues/sortedbyvotes/%d", this.serverUrl, count);
-        new LoadTopVotedIssuesAsync(this.context, topVotedResult, tokensDbHandler.getToken("login"), loadTopVotedIssuesUrl).execute();
+        new LoadTopVotedIssuesAsync(this.context, topVotedResult, tokensDbHandler.getToken("login"), loadTopVotedIssuesUrl, this.serverUrl).execute();
     }
 
-    public void LoadMyIssues(IMyIssue myIssues, int count) {
+    public void LoadMyIssues(IMyIssue myIssues) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
-        String loadMyIssuesUrl = String.format("%sapi/", this.serverUrl, count);
+        String loadMyIssuesUrl = String.format("%sapi/issues/my", this.serverUrl);
         new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl).execute();
     }
 

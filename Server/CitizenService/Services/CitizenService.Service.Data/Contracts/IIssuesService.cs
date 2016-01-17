@@ -19,10 +19,10 @@
 
         bool DeleteIssue(int id, string userId);
 
-        bool UpVoteIssue(int id, string userId);
+        int UpVoteIssue(int id, string userId);
 
         bool ReportAsIncorrectIssue(int id, string userId);
 
-        IQueryable<Issue> GetIssuesByFilters(string city);
+        IQueryable<Issue> GetIssuesByFilters(string city, string title);
     }
 }

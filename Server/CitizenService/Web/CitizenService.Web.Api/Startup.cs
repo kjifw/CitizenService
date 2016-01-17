@@ -7,6 +7,8 @@ using Ninject.Web.WebApi.OwinHost;
 
 using CitizenService.Web.Api.App_Start;
 using CitizenService.Common.Constants;
+using CitizenService.Models;
+
 
 [assembly: OwinStartup(typeof(CitizenService.Web.Api.Startup))]
 

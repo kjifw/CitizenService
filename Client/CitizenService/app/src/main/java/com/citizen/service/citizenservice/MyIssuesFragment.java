@@ -26,22 +26,18 @@ public class MyIssuesFragment extends ListFragment {
         return  view;
     }
 
-    private boolean areIssuesLoaded = false;
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (areIssuesLoaded == false) {
-            List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
-            list.clear();
-            ListAdapter adapter = new ListItemAdapter(getActivity(), list);
-            setListAdapter(adapter);
+        List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
+        list.clear();
+        ListAdapter adapter = new ListItemAdapter(getActivity(), list);
+        setListAdapter(adapter);
 
-            areIssuesLoaded = true;
-            HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
-            httpClient.LoadMyIssues((IMyIssue) getActivity(), 4);
-        }
+        setListAdapter(adapter);
+        HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
+        httpClient.LoadMyIssues((IMyIssue) getActivity());
     }
 
     @Override

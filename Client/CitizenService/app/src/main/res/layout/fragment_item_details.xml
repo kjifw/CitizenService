@@ -63,11 +63,11 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         style="@style/DefaultWrapDimensions"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/detailsButtonVote"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/vote"
-        android:layout_below="@+id/detailsDesciption"/>
+        android:layout_below="@+id/detailsDesciption"
+        android:text="Vote"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultButtonStyle"/>
 
 </RelativeLayout>

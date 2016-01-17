@@ -1,6 +1,7 @@
 package com.citizen.service.citizenservice;
 
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.GestureDetector;
@@ -8,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,7 @@ public class ItemDetailsFragment extends Fragment {
             setData(model);
         }
 
-        ImageButton voteButton = (ImageButton) getActivity().findViewById(R.id.detailsButtonVote);
+        Button voteButton = (Button) getActivity().findViewById(R.id.detailsButtonVote);
         voteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +75,6 @@ public class ItemDetailsFragment extends Fragment {
         title.setText(model.getTitle());
         author.setText(model.getAuthor());
         description.setText(model.getDescription());
-        //image.setImageURI(model.getImage());
+        //image.setImageURI(Uri.parse(model.getImage()));
     }
 }

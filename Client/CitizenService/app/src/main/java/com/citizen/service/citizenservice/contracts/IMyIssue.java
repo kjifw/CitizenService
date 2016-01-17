@@ -5,5 +5,5 @@ import com.citizen.service.citizenservice.models.IssueListItemModel;
 import java.util.List;
 
 public interface IMyIssue {
-    void setTopVotedResultData(List<IssueListItemModel> models);
+    void setMyIssueData(List<IssueListItemModel> models);
 }

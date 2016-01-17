@@ -19,6 +19,7 @@ import java.util.List;
 
 public class MyIssuesFragment extends ListFragment {
     ActivityManager manager;
+    private final static int NUMBER_OF_ISSUES_TO_LOAD = 10;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

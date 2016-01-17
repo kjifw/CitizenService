@@ -89,6 +89,6 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
             }
         }
 
-        this.myIssues.setTopVotedResultData(issuesReadyForListing);
+        this.myIssues.setMyIssueData(issuesReadyForListing);
     }
 }

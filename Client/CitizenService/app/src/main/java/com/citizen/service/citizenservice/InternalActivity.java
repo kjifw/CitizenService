@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.citizen.service.citizenservice.contracts.IMyIssue;
 import com.citizen.service.citizenservice.contracts.ISearchResult;
 import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InternalActivity extends AppCompatActivity implements ActivityManager,
-        NavigationService, ISearchResult, ITopVotedResult {
+        NavigationService, ISearchResult, ITopVotedResult, IMyIssue {
     ViewPager viewPager;
     CitiesDbHandler dbHandler;
     LinearLayout imagesView;
@@ -189,23 +190,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         mDrawerToggle.syncState();
     }
 
-    public void onSearchButtonClick(View view) {
-        EditText title = (EditText) findViewById(R.id.searchTitle);
-        EditText city = (EditText) findViewById(R.id.searchCity);
-
-//        if (title.getText().toString().matches("")) {
-//            Toast.makeText(getApplicationContext(), "Title cannot be empty.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (city.getText().toString().matches("")) {
-//            Toast.makeText(getApplicationContext(), "City cannot be empty.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-        viewPager.setCurrentItem(4);
-    }
-
     @Override
     public void setDetailsInformation(int itemId, int fragmentId) {
         String key = "currentFragment";
@@ -234,6 +218,12 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
     public void setTopVotedResultData(List<IssueListItemModel> models) {
         issuesList.clear();
         issuesList.addAll(models);
+    }
+
+    @Override
+    public void setMyIssueData(List<IssueListItemModel> models) {
+        myIssuesList.clear();
+        myIssuesList.addAll(models);
     }
 
     public class InternalPagerAdapter extends FragmentPagerAdapter {

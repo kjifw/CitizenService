@@ -33,7 +33,7 @@ public class MyIssuesFragment extends ListFragment {
 
         List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
         list.clear();
-
+/*
         // For testing purposes - to be replaced
         Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                 "://" + getResources().getResourcePackageName(R.drawable.item)
@@ -47,7 +47,7 @@ public class MyIssuesFragment extends ListFragment {
         list.add(new IssueListItemModel(imageUri, "myIssuestitle4", "votes4", "description4", "author4"));
         list.add(new IssueListItemModel(imageUri, "myIssuestitle5", "votes5", "description5", "author5"));
         list.add(new IssueListItemModel(imageUri, "myIssuestitle6", "votes6", "description6", "author6"));
-
+*/
         ListAdapter adapter = new ListItemAdapter(getActivity(), list);
 
         setListAdapter(adapter);

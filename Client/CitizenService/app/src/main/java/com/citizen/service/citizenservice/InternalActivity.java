@@ -28,7 +28,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.citizen.service.citizenservice.contracts.ISearchResult;
+import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
+import com.citizen.service.citizenservice.navigation.NavigationService;
 import com.citizen.service.citizenservice.storage.CitiesDbHandler;
 
 import java.io.File;
@@ -39,7 +41,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InternalActivity extends AppCompatActivity implements ActivityManager, ISearchResult{
+public class InternalActivity extends AppCompatActivity implements ActivityManager,
+        NavigationService, ISearchResult, ITopVotedResult {
     ViewPager viewPager;
     CitiesDbHandler dbHandler;
     LinearLayout imagesView;
@@ -98,7 +101,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
             Intent logout = new Intent(InternalActivity.this, MainActivity.class);
             InternalActivity.this.startActivity(logout);
             finish();
-
             return true;
         }
 
@@ -119,7 +121,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
-           if(requestCode == LOAD_PHOTO) {
+            if(requestCode == LOAD_PHOTO) {
                     Uri selectedImageUri = data.getData();
                     ImageView item = new ImageView(getApplicationContext());
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -201,10 +203,6 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 //            return;
 //        }
 
-
-
-
-
         viewPager.setCurrentItem(4);
     }
 
@@ -227,9 +225,15 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
     }
 
     @Override
-    public void setResultData(List<IssueListItemModel> models) {
+    public void setSearchResultData(List<IssueListItemModel> models) {
         searchResultList.clear();
         searchResultList.addAll(models);
+    }
+
+    @Override
+    public void setTopVotedResultData(List<IssueListItemModel> models) {
+        issuesList.clear();
+        issuesList.addAll(models);
     }
 
     public class InternalPagerAdapter extends FragmentPagerAdapter {
@@ -260,6 +264,16 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         cursor.moveToFirst();
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
         return cursor.getString(idx);
+    }
+
+    @Override
+    public void goToInternalActivity() {
+
+    }
+
+    @Override
+    public void goToIssuesFragment() {
+        viewPager.setCurrentItem(4);
     }
 }
 

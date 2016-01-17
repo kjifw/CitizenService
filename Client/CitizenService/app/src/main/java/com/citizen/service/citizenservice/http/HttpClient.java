@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.citizen.service.citizenservice.R;
+import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.navigation.NavigationService;
 import com.citizen.service.citizenservice.storage.TokensDbHandler;
 
@@ -54,5 +55,11 @@ public class HttpClient {
 
         ImageUpload imageUpload = new ImageUpload(url, "http", filePath, tokensDbHandler.getToken("login"));
         imageUpload.upload();
+    }
+
+    public void LoadTopVotedIssues(ITopVotedResult topVotedResult, int count) {
+        TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
+        String loadTopVotedIssuesUrl = String.format("%sapi/issues/sortedbyvotes/%d", this.serverUrl, count);
+        new LoadTopVotedIssuesAsync(this.context, topVotedResult, tokensDbHandler.getToken("login"), loadTopVotedIssuesUrl).execute();
     }
 }

@@ -4,6 +4,6 @@ import com.citizen.service.citizenservice.models.IssueListItemModel;
 
 import java.util.List;
 
-public interface ISearchResult {
-    void setSearchResultData(List<IssueListItemModel> models);
+public interface ITopVotedResult {
+    void setTopVotedResultData(List<IssueListItemModel> models);
 }

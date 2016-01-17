@@ -37,7 +37,7 @@ public class MyIssuesItemDetailsFragment extends Fragment {
             title.setText(model.getTitle());
             author.setText(model.getAuthor());
             description.setText(model.getDescription());
-            image.setImageURI(model.getImage());
+            //image.setImageURI(model.getImage());
         }
     }
 }

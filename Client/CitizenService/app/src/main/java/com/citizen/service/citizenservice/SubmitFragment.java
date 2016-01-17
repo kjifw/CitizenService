@@ -15,11 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import com.citizen.service.citizenservice.geolocation.UpdateCurrentCity;
 import com.citizen.service.citizenservice.http.PublishIssue;
 import com.citizen.service.citizenservice.http.PublishIssueData;
+import com.citizen.service.citizenservice.navigation.NavigationService;
 import com.citizen.service.citizenservice.storage.TokensDbHandler;
 
 
@@ -100,7 +103,10 @@ public class SubmitFragment extends Fragment {
                 PublishIssue publishIssue = new PublishIssue(getContext(), url, tokensDbHandler.getToken("login"));
                 publishIssue.execute(publishIssueData);
 
-                ((InternalActivity) getActivity()).viewPager.setCurrentItem(0);
+                Toast.makeText(getContext(), "Issue submited", Toast.LENGTH_SHORT).show();
+
+                NavigationService navigationService = (NavigationService) getActivity();
+                navigationService.goToIssuesFragment();
             }
         });
 

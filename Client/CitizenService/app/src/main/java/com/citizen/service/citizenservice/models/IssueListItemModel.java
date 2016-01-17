@@ -3,23 +3,22 @@ package com.citizen.service.citizenservice.models;
 import android.net.Uri;
 
 public class IssueListItemModel {
-    private Uri image;
+    private String imageUrl;
     private String title;
     private String votesCount;
     private String description;
     private String author;
 
-    public IssueListItemModel(Uri i, String t, String c, String description, String author){
-        this.image = i;
-        this.title = t;
-        this.votesCount = c;
+    public IssueListItemModel(String imageUrl, String title, String votesCount, String description, String author) {
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.votesCount = votesCount;
         this.description = description;
         this.author = author;
     }
 
-    // Getters
-    public Uri getImage() {
-        return image;
+    public String getImage() {
+        return imageUrl;
     }
 
     public String getTitle() {
@@ -38,9 +37,8 @@ public class IssueListItemModel {
         return author;
     }
 
-    // Setters
-    public void setImage(Uri image) {
-        this.image = image;
+    public void setImage(String image) {
+        this.imageUrl = image;
     }
 
     public void setTitle(String title) {

@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity implements NavigationService
         startActivity(intent);
     }
 
+    @Override
+    public void goToIssuesFragment() {
+
+    }
+
     public class MainPagerAdapter extends FragmentPagerAdapter {
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);

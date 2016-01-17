@@ -27,6 +27,6 @@ public class SearchIssue extends AsyncTask<SearchIssueData, Void, List<IssueList
 
     @Override
     protected void onPostExecute(List<IssueListItemModel> models) {
-        searchResult.setResultData(models);
+        //searchResult.setResultData(models);
     }
 }

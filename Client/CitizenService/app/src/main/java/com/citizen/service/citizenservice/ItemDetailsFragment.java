@@ -44,8 +44,8 @@ public class ItemDetailsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Bundle args = getArguments();
 
+        Bundle args = getArguments();
         title = (TextView) getActivity().findViewById(R.id.detailsTitle);
         author = (TextView) getActivity().findViewById(R.id.detailsAuthor);
         description = (TextView) getActivity().findViewById(R.id.detailsDesciption);
@@ -74,6 +74,6 @@ public class ItemDetailsFragment extends Fragment {
         title.setText(model.getTitle());
         author.setText(model.getAuthor());
         description.setText(model.getDescription());
-        image.setImageURI(model.getImage());
+        //image.setImageURI(model.getImage());
     }
 }

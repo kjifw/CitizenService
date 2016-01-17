@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.citizen.service.citizenservice.helpers.PicassoBuilder;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -62,16 +63,9 @@ public class ListItemAdapter extends BaseAdapter{
 
         IssueListItemModel listItem = (IssueListItemModel)getItem(position);
 
-        Picasso.Builder builder = new Picasso.Builder(this.context);
-        Picasso picasso =  builder.downloader(new OkHttpDownloader(this.context) {
-            @Override
-            protected HttpURLConnection openConnection(Uri uri) throws IOException {
-                HttpURLConnection connection = super.openConnection(uri);
-                connection.setRequestProperty("Host", "localhost");
-                return connection;
-            }
-        }).build();
-        picasso.load(listItem.getImage()).into(imgIcon);
+        Picasso picasso = PicassoBuilder.getInstance(this.context);
+
+        picasso.load(listItem.getImage()).fit().into(imgIcon);
         txtTitle.setText(listItem.getTitle());
         txtVotes.setText(listItem.getVotesCount());
 

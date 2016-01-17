@@ -2,7 +2,9 @@ package com.citizen.service.citizenservice.http;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
+import android.widget.ListAdapter;
 
+import com.citizen.service.citizenservice.ListItemAdapter;
 import com.citizen.service.citizenservice.contracts.IMyIssue;
 import com.citizen.service.citizenservice.contracts.ISearchIssue;
 import com.citizen.service.citizenservice.contracts.ITopVotedResult;
@@ -41,16 +43,16 @@ public class HttpClient {
         imageUpload.upload();
     }
 
-    public void LoadTopVotedIssues(ITopVotedResult topVotedResult, int count) {
+    public void LoadTopVotedIssues(ITopVotedResult topVotedResult, int count, ListItemAdapter adapter) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
         String loadTopVotedIssuesUrl = String.format("%sapi/issues/sortedbyvotes/%d", this.serverUrl, count);
-        new LoadTopVotedIssuesAsync(this.context, topVotedResult, tokensDbHandler.getToken("login"), loadTopVotedIssuesUrl, this.serverUrl).execute();
+        new LoadTopVotedIssuesAsync(this.context, topVotedResult, tokensDbHandler.getToken("login"), loadTopVotedIssuesUrl, this.serverUrl, adapter).execute();
     }
 
-    public void LoadMyIssues(IMyIssue myIssues) {
+    public void LoadMyIssues(IMyIssue myIssues, ListItemAdapter adapter) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
         String loadMyIssuesUrl = String.format("%sapi/issues/my", this.serverUrl);
-        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl).execute();
+        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl, adapter).execute();
     }
 
     public void LoadSearchIssues(ISearchIssue issues, int count){

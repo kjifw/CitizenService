@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.citizen.service.citizenservice.ListItemAdapter;
 import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
@@ -26,14 +27,16 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
     private Context context;
     private ITopVotedResult topVotedResult;
     private String authorizationToken;
+    private ListItemAdapter adapter;
 
     public LoadTopVotedIssuesAsync(Context context, ITopVotedResult topVotedResult,
-                                   String authorizationToken, String topVotedIssuesUrl, String serverUrl) {
+                                   String authorizationToken, String topVotedIssuesUrl, String serverUrl, ListItemAdapter adapter) {
         this.context = context;
         this.topVotedResult = topVotedResult;
         this.authorizationToken = authorizationToken;
         this.topVotedIssuesUrl = topVotedIssuesUrl;
         this.serverUrl = serverUrl;
+        this.adapter = adapter;
     }
 
     @Override
@@ -108,5 +111,6 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
         }
 
         this.topVotedResult.setTopVotedResultData(issuesReadyForListing);
+        this.adapter.notifyDataSetChanged();
     }
 }

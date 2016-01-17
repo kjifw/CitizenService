@@ -208,6 +208,35 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
         this.bundle.putInt("currentItem", itemId);
     }
 
+    private boolean collectionContainsObject(List<IssueListItemModel> collection, IssueListItemModel obj) {
+        for(int i = 0; i < collection.size(); i++) {
+            IssueListItemModel model = collection.get(i);
+            if((model.getAuthor().equals(obj.getAuthor())) && (model.getTitle().equals(obj.getTitle()))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void setMyIssueData(List<IssueListItemModel> models) {
+        //myIssuesList.clear();
+        //myIssuesList.addAll(models);
+        if(myIssuesList.size() == 0) {
+            myIssuesList.clear();
+            myIssuesList.addAll(models);
+            return;
+        }
+
+        for(int i = 0; i < models.size(); i++) {
+            IssueListItemModel model = models.get(i);
+            if(collectionContainsObject(myIssuesList, model) == false) {
+                myIssuesList.add(model);
+            }
+        }
+    }
+
     @Override
     public void setSearchResultData(List<IssueListItemModel> models) {
         searchResultList.clear();
@@ -216,14 +245,20 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
     @Override
     public void setTopVotedResultData(List<IssueListItemModel> models) {
-        issuesList.clear();
-        issuesList.addAll(models);
-    }
+        //issuesList.clear();
+        //issuesList.addAll(models);
+        if(issuesList.size() == 0) {
+            issuesList.clear();
+            issuesList.addAll(models);
+            return;
+        }
 
-    @Override
-    public void setMyIssueData(List<IssueListItemModel> models) {
-        myIssuesList.clear();
-        myIssuesList.addAll(models);
+        for(int i = 0; i < models.size(); i++) {
+            IssueListItemModel model = models.get(i);
+            if(collectionContainsObject(issuesList, model) == false) {
+                issuesList.add(model);
+            }
+        }
     }
 
     public class InternalPagerAdapter extends FragmentPagerAdapter {
@@ -263,7 +298,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
     @Override
     public void goToIssuesFragment() {
-        viewPager.setCurrentItem(4);
+        viewPager.setCurrentItem(0);
     }
 }
 

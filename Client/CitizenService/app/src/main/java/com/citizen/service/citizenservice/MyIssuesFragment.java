@@ -19,7 +19,6 @@ import java.util.List;
 
 public class MyIssuesFragment extends ListFragment {
     ActivityManager manager;
-    private final static int NUMBER_OF_ISSUES_TO_LOAD = 10;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,18 +26,21 @@ public class MyIssuesFragment extends ListFragment {
         return  view;
     }
 
+    ListItemAdapter adapter = null;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
-        list.clear();
-        ListAdapter adapter = new ListItemAdapter(getActivity(), list);
-        setListAdapter(adapter);
+        if(adapter == null) {
+            List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
+            list.clear();
+            adapter = new ListItemAdapter(getActivity(), list);
+            setListAdapter(adapter);
+        }
 
-        setListAdapter(adapter);
         HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
-        httpClient.LoadMyIssues((IMyIssue) getActivity());
+        httpClient.LoadMyIssues((IMyIssue) getActivity(), adapter);
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.citizen.service.citizenservice.http;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ListAdapter;
 
+import com.citizen.service.citizenservice.ListItemAdapter;
 import com.citizen.service.citizenservice.contracts.IMyIssue;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
@@ -23,12 +25,14 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
     private Context context;
     private IMyIssue myIssues;
     private String authorizationToken;
+    private ListItemAdapter adapter;
 
-    public LoadMyIssuesAsync(Context context, IMyIssue myIssues, String authorizationToken, String myIssuesUrl) {
+    public LoadMyIssuesAsync(Context context, IMyIssue myIssues, String authorizationToken, String myIssuesUrl, ListItemAdapter adapter) {
         this.myIssuesUrl = myIssuesUrl;
         this.context = context;
         this.myIssues = myIssues;
         this.authorizationToken = authorizationToken;
+        this.adapter = adapter;
     }
 
     @Override
@@ -90,5 +94,6 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
         }
 
         this.myIssues.setMyIssueData(issuesReadyForListing);
+        this.adapter.notifyDataSetChanged();
     }
 }

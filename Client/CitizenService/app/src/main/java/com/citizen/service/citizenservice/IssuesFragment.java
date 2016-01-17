@@ -28,22 +28,21 @@ public class IssuesFragment extends ListFragment {
         return  view;
     }
 
-    private boolean areIssuesLoaded = false;
+    ListItemAdapter adapter = null;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(areIssuesLoaded == false) {
+        if(adapter == null) {
             List<IssueListItemModel> list = ((InternalActivity) getActivity()).issuesList;
             list.clear();
-            ListAdapter adapter = new ListItemAdapter(getActivity(), list);
+            adapter = new ListItemAdapter(getActivity(), list);
             setListAdapter(adapter);
-
-            areIssuesLoaded = true;
-            HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
-            httpClient.LoadTopVotedIssues((ITopVotedResult) getActivity(), NUMBER_OF_ISSUES_TO_LOAD);
         }
+
+        HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
+        httpClient.LoadTopVotedIssues((ITopVotedResult) getActivity(), NUMBER_OF_ISSUES_TO_LOAD, adapter);
     }
 
     @Override

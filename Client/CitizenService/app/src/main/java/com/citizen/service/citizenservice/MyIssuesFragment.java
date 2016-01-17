@@ -1,8 +1,6 @@
 package com.citizen.service.citizenservice;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
@@ -13,9 +11,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.citizen.service.citizenservice.contracts.IMyIssue;
+import com.citizen.service.citizenservice.http.HttpClient;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyIssuesFragment extends ListFragment {
@@ -27,36 +26,28 @@ public class MyIssuesFragment extends ListFragment {
         return  view;
     }
 
+    private boolean areIssuesLoaded = false;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
-        list.clear();
-/*
-        // For testing purposes - to be replaced
-        Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-                "://" + getResources().getResourcePackageName(R.drawable.item)
-                + '/' + getResources().getResourceTypeName(R.drawable.item)
-                + '/' + getResources().getResourceEntryName(R.drawable.item));
+        if (areIssuesLoaded == false) {
+            List<IssueListItemModel> list = ((InternalActivity) getActivity()).myIssuesList;
+            list.clear();
+            ListAdapter adapter = new ListItemAdapter(getActivity(), list);
+            setListAdapter(adapter);
 
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle0", "votes0", "description0", "author0"));
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle1", "votes1", "description1", "author1"));
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle2", "votes2", "description2", "author2"));
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle3", "votes3", "description3", "author3"));
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle4", "votes4", "description4", "author4"));
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle5", "votes5", "description5", "author5"));
-        list.add(new IssueListItemModel(imageUri, "myIssuestitle6", "votes6", "description6", "author6"));
-*/
-        ListAdapter adapter = new ListItemAdapter(getActivity(), list);
-
-        setListAdapter(adapter);
+            areIssuesLoaded = true;
+            HttpClient httpClient = new HttpClient(getContext(), getResources().getString(R.string.server_url));
+            httpClient.LoadMyIssues((IMyIssue) getActivity(), 4);
+        }
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Toast.makeText(getActivity(), "item clicked" + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "item clicked " + position, Toast.LENGTH_SHORT).show();
 
         ((InternalActivity) getActivity()).setDetailsInformation(position, 5);
 

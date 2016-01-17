@@ -1,29 +1,13 @@
 package com.citizen.service.citizenservice.http;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.citizen.service.citizenservice.R;
+import com.citizen.service.citizenservice.contracts.IMyIssue;
+import com.citizen.service.citizenservice.contracts.ISearchIssue;
 import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.navigation.NavigationService;
 import com.citizen.service.citizenservice.storage.TokensDbHandler;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class HttpClient {
 
@@ -61,5 +45,17 @@ public class HttpClient {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
         String loadTopVotedIssuesUrl = String.format("%sapi/issues/sortedbyvotes/%d", this.serverUrl, count);
         new LoadTopVotedIssuesAsync(this.context, topVotedResult, tokensDbHandler.getToken("login"), loadTopVotedIssuesUrl).execute();
+    }
+
+    public void LoadMyIssues(IMyIssue myIssues, int count) {
+        TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
+        String loadMyIssuesUrl = String.format("%sapi/", this.serverUrl, count);
+        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl).execute();
+    }
+
+    public void LoadSearchIssues(ISearchIssue issues, int count){
+        TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
+        String loadIssuesUrl = String.format("%sapi/", this.serverUrl, count);
+        //new SearchIssue(this.context, serverUrl, tokensDbHandler.getToken("login"), loadIssuesUrl).execute();
     }
 }

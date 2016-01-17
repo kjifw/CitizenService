@@ -13,6 +13,8 @@
 
         IQueryable<Issue> GetIssuesOfUser(string userId);
 
+        IQueryable<Issue> GetTopVotedIssues(int count);
+
         bool AddImageToIssue(int id, string userId, string imageUrl);
 
         bool DeleteIssue(int id, string userId);

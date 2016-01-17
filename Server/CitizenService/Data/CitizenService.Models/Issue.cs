@@ -44,6 +44,8 @@
             set { this.imagesData = value; }
         }
 
+        public int UpVotesCount { get; set; }
+
         public virtual ICollection<User> UpVotedUsers
         {
             get { return this.upVotedUsers; }

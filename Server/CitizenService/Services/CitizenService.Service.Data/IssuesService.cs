@@ -105,6 +105,16 @@
             return issues;
         }
 
+        public IQueryable<Issue> GetTopVotedIssues(int count)
+        {
+            var issues = this.issues
+                .All()
+                .OrderBy(i => i.UpVotesCount)
+                .Take(count);
+
+            return issues;
+        }
+
         public bool ReportAsIncorrectIssue(int id, string userId)
         {
             var issue = this.issues

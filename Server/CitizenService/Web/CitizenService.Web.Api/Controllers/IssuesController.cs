@@ -36,5 +36,16 @@
 
             return this.Created(string.Format("/api/issues/{0}", issueResult.Id), issueResult);
         }
+
+        [Route("api/issues/sortedbyvotes/{count}")]
+        public IHttpActionResult GetIssuesSoredByVotes(int count)
+        {
+            var issuesResult = this.issuesService
+                .GetTopVotedIssues(count)
+                .ProjectTo<ListedIssueResponseModel>()
+                .ToList();
+
+            return this.Ok(issuesResult);
+        }
     }
 }

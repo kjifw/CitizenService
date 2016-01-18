@@ -12,13 +12,18 @@ public class IssueListItemModel {
     private String votesCount;
     private String description;
     private String author;
+    private String city;
+    private boolean isAnonymous;
 
-    public IssueListItemModel(String imageUrl, String title, String votesCount, String description, String author) {
+    public IssueListItemModel(String imageUrl, String title, String votesCount,
+                              String description, String author, String city, String isAnonymous) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.votesCount = votesCount;
         this.description = description;
         this.author = author;
+        this.city = city;
+        this.isAnonymous = Boolean.parseBoolean(isAnonymous);
     }
 
     public void addImageUrl(String imageUrl) {
@@ -42,11 +47,19 @@ public class IssueListItemModel {
     }
 
     public String getAuthor() {
-        return author;
+        if(isAnonymous) {
+            return "Author Anonymous";
+        } else {
+            return author;
+        }
     }
 
     public ArrayList<String> getImagesUrls() {
         return imagesUrls;
+    }
+
+    public String getCity (){
+        return  this.city;
     }
 
     public void setImage(String image) {

@@ -29,8 +29,8 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
     private String authorizationToken;
     private ListItemAdapter adapter;
 
-    public LoadTopVotedIssuesAsync(Context context, ITopVotedResult topVotedResult, String authorizationToken,
-                                   String topVotedIssuesUrl, String serverUrl, ListItemAdapter adapter) {
+    public LoadTopVotedIssuesAsync(Context context, ITopVotedResult topVotedResult,
+                                   String authorizationToken, String topVotedIssuesUrl, String serverUrl, ListItemAdapter adapter) {
         this.context = context;
         this.topVotedResult = topVotedResult;
         this.authorizationToken = authorizationToken;
@@ -55,7 +55,7 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
             urlConnection.setRequestProperty("Host", "localhost");
             urlConnection.setRequestProperty("Authorization", "Bearer " + this.authorizationToken);
             urlConnection.connect();
-
+            Log.i("BERER", this.authorizationToken);
             Log.d("Response code", String.valueOf(urlConnection.getResponseCode()));
 
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
 
                 IssueListItemModel issueForListing = new IssueListItemModel(imageUrl, issue.getString("Title"),
                         String.valueOf((Integer)issue.getInt("UpVotesCount")), issue.getString("Description"),
-                        issue.getString("Author"));
+                        issue.getString("Author"), issue.getString("City"), issue.getString("IsAnonymous"));
 
                 JSONArray issueImagesUrls = issue.getJSONArray("ImagesUrls");
 
@@ -104,7 +104,6 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
                     JSONObject entry = issueImagesUrls.getJSONObject(j);
                     issueForListing.addImageUrl(entry.getString("Url").replace("http://localhost/", this.serverUrl));
                 }
-
                 issuesReadyForListing.add(issueForListing);
             } catch (JSONException ex) {
 

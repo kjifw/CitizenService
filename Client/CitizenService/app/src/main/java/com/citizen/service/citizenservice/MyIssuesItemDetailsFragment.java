@@ -19,6 +19,7 @@ public class MyIssuesItemDetailsFragment extends Fragment {
     private TextView author;
     private TextView description;
     private ImageView image;
+    private TextView city;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,10 +37,12 @@ public class MyIssuesItemDetailsFragment extends Fragment {
             author = (TextView) getActivity().findViewById(R.id.basicDetailsAuthor);
             description = (TextView) getActivity().findViewById(R.id.basicDetailsDescription);
             image = (ImageView) getActivity().findViewById(R.id.basicDetailsImageContainer);
+            city = (TextView) getActivity().findViewById(R.id.basicDetailsCity);
 
             title.setText(model.getTitle());
             author.setText(model.getAuthor());
             description.setText(model.getDescription());
+            city.setText(model.getCity());
 
             final Picasso picasso = PicassoBuilder.getInstance(this.getContext());
 

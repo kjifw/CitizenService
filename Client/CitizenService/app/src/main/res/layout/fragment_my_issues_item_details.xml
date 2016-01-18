@@ -28,10 +28,18 @@
         style="@style/DefaultWrapDimensions"/>
 
     <TextView
-        android:id="@+id/detailsVotesCount"
-        android:text="Votes count"
+        android:id="@+id/basicDetailsCity"
+        android:text="Sample city"
         android:layout_toRightOf="@+id/basicDetailsImageContainer"
         android:layout_below="@+id/basicDetailsAuthor"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        style="@style/DefaultWrapDimensions"/>
+
+    <TextView
+        android:id="@+id/basicDetailsVotesCount"
+        android:text="Votes count"
+        android:layout_toRightOf="@+id/basicDetailsImageContainer"
+        android:layout_below="@+id/basicDetailsCity"
         android:textSize="16sp"
         android:layout_margin="@dimen/activity_horizontal_margin"
         style="@style/DefaultWrapDimensions"/>

@@ -90,8 +90,8 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
                 String imageUrl = issue.getString("ImageUrl").replace("http://localhost/", this.serverUrl);
 
                 IssueListItemModel issueForListing = new IssueListItemModel(imageUrl, issue.getString("Title"),
-                        String.valueOf((Integer)issue.getInt("UpVotesCount")), issue.getString("Description"),
-                        issue.getString("Author"));
+                        String.valueOf((Integer) issue.getInt("UpVotesCount")), issue.getString("Description"),
+                        issue.getString("Author"), issue.getString("City"), issue.getString("IsAnonymous"));
 
                 JSONArray issueImagesUrls = issue.getJSONArray("ImagesUrls");
 

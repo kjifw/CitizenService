@@ -16,6 +16,8 @@ import com.citizen.service.citizenservice.helpers.PicassoBuilder;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ItemDetailsFragment extends Fragment {
@@ -23,6 +25,7 @@ public class ItemDetailsFragment extends Fragment {
     private TextView author;
     private TextView description;
     private ImageView image;
+    private TextView city;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class ItemDetailsFragment extends Fragment {
         author = (TextView) getActivity().findViewById(R.id.detailsAuthor);
         description = (TextView) getActivity().findViewById(R.id.detailsDescription);
         image = (ImageView) getActivity().findViewById(R.id.detailsImageContainer);
+        city = (TextView) getActivity().findViewById(R.id.detailsCity);
 
         if (args.getString("currentFragment") == "Issues") {
             IssueListItemModel model = ((InternalActivity) getActivity()).issuesList.get(args.getInt("currentItem"));
@@ -81,6 +85,7 @@ public class ItemDetailsFragment extends Fragment {
         title.setText(model.getTitle());
         author.setText(model.getAuthor());
         description.setText(model.getDescription());
+        city.setText(model.getCity());
 
         final Picasso picasso = PicassoBuilder.getInstance(this.getContext());
 

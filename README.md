@@ -1,1 +1,3 @@
 # Citizen Service Mobile App
+
+The main goal of the app is to create and share issues that consern not only you but other citizens as well. You can add title, city, provide a short description of the issue and images of the issue you want to submit (you can be anonymous if you want). There is also a voting system implemented - if you feel an issue is valid you can support it or if you think it is not you can report it as incorrect. After a certain amount of reports the issue is removed from the database. You can also view detailed information about each issue. 

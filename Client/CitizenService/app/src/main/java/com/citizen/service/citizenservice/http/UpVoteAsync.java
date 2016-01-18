@@ -3,10 +3,13 @@ package com.citizen.service.citizenservice.http;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,12 +22,14 @@ public class UpVoteAsync extends AsyncTask<String, Void, JSONObject> {
     private Context context;
     private String upVoteUrl;
     private String authorizationToken;
+    private View view;
 
-    public UpVoteAsync(Context context, String upVoteUrl, String authorizationToken)
+    public UpVoteAsync(Context context, String upVoteUrl, String authorizationToken, View view)
     {
         this.context = context;
         this.upVoteUrl = upVoteUrl;
         this.authorizationToken = authorizationToken;
+        this.view = view;
     }
 
     @Override
@@ -78,7 +83,8 @@ public class UpVoteAsync extends AsyncTask<String, Void, JSONObject> {
         try {
             int votesCount = result.getInt("VotesCount");
             Log.d("VOTES_COUNT", String.valueOf(votesCount));
-            // Update issue votes count
+            TextView textView = (TextView) this.view;
+            textView.setText("Votes count: " + toString().valueOf(votesCount));
         } catch (JSONException ex) {
 
         }

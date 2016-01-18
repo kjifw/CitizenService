@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.view.Menu;
@@ -221,8 +222,7 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
     @Override
     public void setMyIssueData(List<IssueListItemModel> models) {
-        //myIssuesList.clear();
-        //myIssuesList.addAll(models);
+
         if(myIssuesList.size() == 0) {
             myIssuesList.clear();
             myIssuesList.addAll(models);
@@ -239,14 +239,37 @@ public class InternalActivity extends AppCompatActivity implements ActivityManag
 
     @Override
     public void setSearchResultData(List<IssueListItemModel> models) {
-        searchResultList.clear();
-        searchResultList.addAll(models);
+
+        if(searchResultList.size() == 0) {
+            searchResultList.clear();
+            searchResultList.addAll(models);
+            return;
+        }
+
+        for(int i = 0; i < models.size(); i++) {
+            IssueListItemModel model = models.get(i);
+            if(collectionContainsObject(searchResultList, model) == false) {
+                searchResultList.add(model);
+            }
+        }
+    }
+
+    ListItemAdapter searchResultAdapter = null;
+
+    @Override
+    public ListItemAdapter getSearchResultAdapter() {
+
+        if(searchResultAdapter == null) {
+            List<IssueListItemModel> list = searchResultList;
+            searchResultAdapter = new ListItemAdapter(this, list);
+        }
+
+        return searchResultAdapter;
     }
 
     @Override
     public void setTopVotedResultData(List<IssueListItemModel> models) {
-        //issuesList.clear();
-        //issuesList.addAll(models);
+
         if(issuesList.size() == 0) {
             issuesList.clear();
             issuesList.addAll(models);

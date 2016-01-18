@@ -22,20 +22,20 @@ import java.util.List;
 
 public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
     private String myIssuesUrl;
+    private String serverUrl;
     private Context context;
     private IMyIssue myIssues;
     private String authorizationToken;
     private ListItemAdapter adapter;
-    private String serverUrl;
 
     public LoadMyIssuesAsync(Context context, IMyIssue myIssues, String authorizationToken,
                              String myIssuesUrl, String serverUrl, ListItemAdapter adapter) {
         this.myIssuesUrl = myIssuesUrl;
+        this.serverUrl = serverUrl;
         this.context = context;
         this.myIssues = myIssues;
         this.authorizationToken = authorizationToken;
         this.adapter = adapter;
-        this.serverUrl = serverUrl;
     }
 
     @Override
@@ -89,9 +89,9 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
 
                 String imageUrl = issue.getString("ImageUrl").replace("http://localhost/", this.serverUrl);
 
-                IssueListItemModel issueForListing = new IssueListItemModel(imageUrl, issue.getString("Title"),
-                        String.valueOf((Integer) issue.getInt("UpVotesCount")), issue.getString("Description"),
-                        issue.getString("Author"), issue.getString("City"), issue.getString("IsAnonymous"));
+                IssueListItemModel issueForListing = new IssueListItemModel(issue.getInt("Id"), imageUrl, issue.getString("Title"),
+                        String.valueOf((Integer)issue.getInt("UpVotesCount")), issue.getString("Description"),
+                        issue.getString("Author"), issue.getString("City"));
 
                 JSONArray issueImagesUrls = issue.getJSONArray("ImagesUrls");
 
@@ -99,9 +99,8 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
                     JSONObject entry = issueImagesUrls.getJSONObject(j);
                     issueForListing.addImageUrl(entry.getString("Url").replace("http://localhost/", this.serverUrl));
                 }
-
                 issuesReadyForListing.add(issueForListing);
-            } catch (JSONException ex){
+            } catch (JSONException ex) {
 
             }
         }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class IssueListItemModel {
 
+    private int id;
     private String imageUrl;
     private ArrayList<String> imagesUrls = new ArrayList<>();
     private String title;
@@ -13,18 +14,18 @@ public class IssueListItemModel {
     private String description;
     private String author;
     private String city;
-    private boolean isAnonymous;
 
-    public IssueListItemModel(String imageUrl, String title, String votesCount,
-                              String description, String author, String city, String isAnonymous) {
+    public IssueListItemModel(int id, String imageUrl, String title, String votesCount, String description, String author, String city) {
+        this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
         this.votesCount = votesCount;
         this.description = description;
         this.author = author;
         this.city = city;
-        this.isAnonymous = Boolean.parseBoolean(isAnonymous);
     }
+
+    public int getId() { return this.id; }
 
     public void addImageUrl(String imageUrl) {
         this.imagesUrls.add(imageUrl);
@@ -47,11 +48,7 @@ public class IssueListItemModel {
     }
 
     public String getAuthor() {
-        if(isAnonymous) {
-            return "Author Anonymous";
-        } else {
-            return author;
-        }
+        return author;
     }
 
     public ArrayList<String> getImagesUrls() {

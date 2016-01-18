@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/detailsVotesCount"
-        android:text="Votes count"
+        android:text="Votes count: "
         android:layout_toRightOf="@+id/detailsImageContainer"
         android:layout_below="@+id/detailsCity"
         android:textSize="16sp"
@@ -61,10 +61,10 @@
     <TextView
         android:id="@+id/detailsButtonReport"
         android:text="Hold to report as incorrect"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/detailsButtonVote"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:clickable="true" />

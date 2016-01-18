@@ -38,13 +38,18 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
 
-                if (passwordValue.toString().matches("")) {
+                if (passwordValue.matches("")) {
                     Toast.makeText(getContext(), "Please input password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (confirmPasswordValue.matches("")) {
                     Toast.makeText(getContext(), "Please repeat password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!passwordValue.equals(confirmPasswordValue)) {
+                    Toast.makeText(getContext(), "The two passwords must be equal", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

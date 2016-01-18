@@ -2,11 +2,13 @@ package com.citizen.service.citizenservice.http;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ListAdapter;
 
 import com.citizen.service.citizenservice.ListItemAdapter;
 import com.citizen.service.citizenservice.contracts.IMyIssue;
 import com.citizen.service.citizenservice.contracts.ISearchIssue;
+import com.citizen.service.citizenservice.contracts.ISearchResult;
 import com.citizen.service.citizenservice.contracts.ITopVotedResult;
 import com.citizen.service.citizenservice.navigation.NavigationService;
 import com.citizen.service.citizenservice.storage.TokensDbHandler;
@@ -52,12 +54,24 @@ public class HttpClient {
     public void LoadMyIssues(IMyIssue myIssues, ListItemAdapter adapter) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
         String loadMyIssuesUrl = String.format("%sapi/issues/my", this.serverUrl);
-        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl, this.serverUrl, adapter).execute();
+        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl, serverUrl, adapter).execute();
     }
 
-    public void LoadSearchIssues(ISearchIssue issues, int count){
+    public void LoadSearchIssues(ISearchResult issues, SearchIssueData searchIssueData, ListItemAdapter adapter) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
-        String loadIssuesUrl = String.format("%sapi/", this.serverUrl, count);
-        //new SearchIssue(this.context, serverUrl, tokensDbHandler.getToken("login"), loadIssuesUrl).execute();
+        String loadIssuesUrl = String.format("%sapi/issues/search/%s/%s", this.serverUrl, searchIssueData.getCity(), searchIssueData.getTitle());
+        new SearchIssueAsync(this.context, tokensDbHandler.getToken("login"), loadIssuesUrl, this.serverUrl, issues, adapter).execute();
+    }
+
+    public void UpVote(View view, int issueId) {
+        TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
+        String upVoteIssueUrl = String.format("%sapi/issues/voteup/%d", this.serverUrl, issueId);
+        new UpVoteAsync(this.context, upVoteIssueUrl, tokensDbHandler.getToken("login"), view).execute();
+    }
+
+    public void ReportIncorrectIssue(int issueId) {
+        TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
+        String reportIssueUrl = String.format("%sapi/issues/report/%d", this.serverUrl, issueId);
+        new ReportAsync(this.context, reportIssueUrl, tokensDbHandler.getToken("login")).execute();
     }
 }

@@ -51,6 +51,7 @@
         }
 
         [Route("api/issues/search/{city}/{title}")]
+        [HttpGet]
         public IHttpActionResult SearchIssues(string city, string title)
         {
             var issuesResult = this.issuesService
@@ -62,6 +63,7 @@
         }
 
         [Route("api/issues/sortedbyvotes/{count}")]
+        [HttpGet]
         public IHttpActionResult GetIssuesSoredByVotes(int count)
         {
             var issuesResult = this.issuesService

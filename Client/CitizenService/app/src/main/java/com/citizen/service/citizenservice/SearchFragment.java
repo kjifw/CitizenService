@@ -9,13 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 
-import com.citizen.service.citizenservice.http.SearchIssue;
+import com.citizen.service.citizenservice.contracts.ISearchIssue;
+import com.citizen.service.citizenservice.contracts.ISearchResult;
+import com.citizen.service.citizenservice.http.HttpClient;
+import com.citizen.service.citizenservice.http.SearchIssueAsync;
 import com.citizen.service.citizenservice.http.SearchIssueData;
+import com.citizen.service.citizenservice.models.IssueListItemModel;
 import com.citizen.service.citizenservice.storage.CitiesDbHandler;
 import com.citizen.service.citizenservice.storage.TokensDbHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -51,12 +57,12 @@ public class SearchFragment extends Fragment {
 
                 ((InternalActivity) getActivity()).dbHandler.addCity(cityInput.getText().toString());
 
-                TokensDbHandler tokensDbHandler = new TokensDbHandler(getContext(), null);
                 String url = getResources().getString(R.string.server_url);
                 SearchIssueData searchIssueData = new SearchIssueData(title, city);
 
-                SearchIssue searchIssue = new SearchIssue(getContext(), url, tokensDbHandler.getToken("login"));
-                searchIssue.execute(searchIssueData);
+                ListItemAdapter adapter = ((ISearchResult) getActivity()).getSearchResultAdapter();
+                HttpClient httpClient = new HttpClient(getContext(), url);
+                httpClient.LoadSearchIssues((ISearchResult) getActivity(), searchIssueData, adapter);
 
                 ((InternalActivity) getActivity()).viewPager.setCurrentItem(4);
             }

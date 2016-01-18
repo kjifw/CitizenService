@@ -13,6 +13,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.citizen.service.citizenservice.contracts.ISearchResult;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
 import java.util.ArrayList;
@@ -30,11 +31,7 @@ public class SearchResultFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        List<IssueListItemModel> list = ((InternalActivity) getActivity()).searchResultList;
-
-        ListAdapter adapter = new ListItemAdapter(getActivity(), list);
-        setListAdapter(adapter);
+        setListAdapter(((ISearchResult) getActivity()).getSearchResultAdapter());
     }
 
     @Override

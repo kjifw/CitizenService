@@ -2,10 +2,9 @@ package com.citizen.service.citizenservice.http;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.citizen.service.citizenservice.ListItemAdapter;
-import com.citizen.service.citizenservice.contracts.ITopVotedResult;
+import com.citizen.service.citizenservice.contracts.ISearchResult;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
 import org.json.JSONArray;
@@ -20,33 +19,31 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> {
-
-    private String topVotedIssuesUrl;
-    private String serverUrl;
+public class SearchIssueAsync extends AsyncTask<SearchIssueData, Void, JSONArray> {
     private Context context;
-    private ITopVotedResult topVotedResult;
+    private String searchUrl;
+    private String serverUrl;
     private String authorizationToken;
     private ListItemAdapter adapter;
+    private ISearchResult searchResult = null;
 
-    public LoadTopVotedIssuesAsync(Context context, ITopVotedResult topVotedResult,
-                                   String authorizationToken, String topVotedIssuesUrl, String serverUrl, ListItemAdapter adapter) {
+    public SearchIssueAsync(Context context, String authorizationToken, String searchUrl,
+                            String serverUrl, ISearchResult searchResult, ListItemAdapter adapter) {
         this.context = context;
-        this.topVotedResult = topVotedResult;
-        this.authorizationToken = authorizationToken;
-        this.topVotedIssuesUrl = topVotedIssuesUrl;
+        this.searchUrl = searchUrl;
         this.serverUrl = serverUrl;
+        this.authorizationToken = authorizationToken;
         this.adapter = adapter;
+        this.searchResult = searchResult;
     }
 
     @Override
-    protected JSONArray doInBackground(String... params) {
+    protected JSONArray doInBackground(SearchIssueData... params) {
         JSONArray listOfIssues = null;
         HttpURLConnection urlConnection = null;
 
-        try {
-
-            URL url = new URL(this.topVotedIssuesUrl);
+        try{
+            URL url = new URL(this.searchUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setUseCaches(false);
             urlConnection.setDoInput(true);
@@ -56,12 +53,9 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
             urlConnection.setRequestProperty("Authorization", "Bearer " + this.authorizationToken);
             urlConnection.connect();
 
-            Log.d("Response code", String.valueOf(urlConnection.getResponseCode()));
+        }  catch (Exception e){
 
-        } catch (Exception e) {
-            Log.e("log_tag", "Error in http connection " + e.toString());
         }
-
         StringBuilder response = new StringBuilder();
 
         try {
@@ -71,13 +65,13 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
                 response.append(line);
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
 
         try {
             listOfIssues = new JSONArray(response.toString());
         } catch (JSONException e) {
-            Log.e("log_tag", "Error parsing data " + e.toString());
+
         }
 
         return listOfIssues;
@@ -85,7 +79,6 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
 
     @Override
     protected void onPostExecute(JSONArray listOfIssues) {
-
         List<IssueListItemModel> issuesReadyForListing = new ArrayList<IssueListItemModel>();
 
         for(int i = 0; i < listOfIssues.length(); i++) {
@@ -110,7 +103,7 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
             }
         }
 
-        this.topVotedResult.setTopVotedResultData(issuesReadyForListing);
+        searchResult.setSearchResultData(issuesReadyForListing);
         this.adapter.notifyDataSetChanged();
     }
 }

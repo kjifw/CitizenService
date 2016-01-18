@@ -109,7 +109,7 @@
         {
             var issues = this.issues
                 .All()
-                .OrderBy(i => i.UpVotesCount)
+                .OrderByDescending(i => i.UpVotesCount)
                 .Take(count);
 
             return issues;
@@ -139,9 +139,9 @@
                 issue.IsDeleted = true;
             }
 
-            this.issues.SaveChanges();
+            //this.issues.SaveChanges();
 
-            user.ReportedAsIncorrectIssues.Add(issue);
+            //user.ReportedAsIncorrectIssues.Add(issue);
             this.users.SaveChanges();
 
             return true;
@@ -165,11 +165,11 @@
                 .FirstOrDefault();
 
             issue.UpVotesCount += 1;
-            issue.UpVotedUsers.Add(user);
+            //issue.UpVotedUsers.Add(user);
             this.issues.SaveChanges();
 
-            user.UpVotedIssues.Add(issue);
-            this.users.SaveChanges();
+            //user.UpVotedIssues.Add(issue);
+            //this.users.SaveChanges();
 
             return issue.UpVotesCount;
         }

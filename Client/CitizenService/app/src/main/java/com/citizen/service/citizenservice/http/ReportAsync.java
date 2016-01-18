@@ -22,6 +22,7 @@ public class ReportAsync extends AsyncTask<String, Void, Void> {
     public ReportAsync(Context context, String reportUrl, String authorizationToken) {
         this.context = context;
         this.reportUrl = reportUrl;
+        this.authorizationToken = authorizationToken;
     }
 
     @Override
@@ -51,6 +52,5 @@ public class ReportAsync extends AsyncTask<String, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
-        // Remove report as incorrect
     }
 }

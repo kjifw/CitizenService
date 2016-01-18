@@ -45,6 +45,10 @@ public class IssueListItemModel {
         return author;
     }
 
+    public ArrayList<String> getImagesUrls() {
+        return imagesUrls;
+    }
+
     public void setImage(String image) {
         this.imageUrl = image;
     }

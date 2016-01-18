@@ -28,8 +28,8 @@
         style="@style/DefaultWrapDimensions"/>
 
     <TextView
-        android:id="@+id/detailsPositiveVotesCount"
-        android:text="Positive Votes"
+        android:id="@+id/detailsVotesCount"
+        android:text="Votes count"
         android:layout_toRightOf="@+id/basicDetailsImageContainer"
         android:layout_below="@+id/basicDetailsAuthor"
         android:textSize="16sp"
@@ -37,16 +37,7 @@
         style="@style/DefaultWrapDimensions"/>
 
     <TextView
-        android:id="@+id/detailsNegativeVotesCount"
-        android:text="Negative Votes"
-        android:layout_toRightOf="@+id/basicDetailsImageContainer"
-        android:layout_below="@+id/detailsPositiveVotesCount"
-        android:textSize="16sp"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        style="@style/DefaultWrapDimensions"/>
-
-    <TextView
-        android:id="@+id/basicDetailsDesciption"
+        android:id="@+id/basicDetailsDescription"
         android:text="Sample description"
         android:layout_below="@+id/basicDetailsImageContainer"
         android:layout_margin="@dimen/activity_horizontal_margin"

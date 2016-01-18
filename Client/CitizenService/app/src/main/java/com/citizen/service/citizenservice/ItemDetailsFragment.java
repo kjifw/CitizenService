@@ -1,6 +1,5 @@
 package com.citizen.service.citizenservice;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.GestureDetector;
@@ -13,7 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.citizen.service.citizenservice.helpers.PicassoBuilder;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class ItemDetailsFragment extends Fragment {
     private TextView title;
@@ -35,6 +38,8 @@ public class ItemDetailsFragment extends Fragment {
         TextView report = (TextView) view.findViewById(R.id.detailsButtonReport);
         report.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
+                Button voteButton = (Button) getActivity().findViewById(R.id.detailsButtonVote);
+                voteButton.setVisibility(View.INVISIBLE);
                 return gestureDetector.onTouchEvent(event);
             }
         });
@@ -48,7 +53,7 @@ public class ItemDetailsFragment extends Fragment {
         Bundle args = getArguments();
         title = (TextView) getActivity().findViewById(R.id.detailsTitle);
         author = (TextView) getActivity().findViewById(R.id.detailsAuthor);
-        description = (TextView) getActivity().findViewById(R.id.detailsDesciption);
+        description = (TextView) getActivity().findViewById(R.id.detailsDescription);
         image = (ImageView) getActivity().findViewById(R.id.detailsImageContainer);
 
         if (args.getString("currentFragment") == "Issues") {
@@ -65,6 +70,8 @@ public class ItemDetailsFragment extends Fragment {
         voteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView report = (TextView) getActivity().findViewById(R.id.detailsButtonReport);
+                report.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(), "Vote successful", Toast.LENGTH_SHORT).show();
             }
         });
@@ -74,5 +81,24 @@ public class ItemDetailsFragment extends Fragment {
         title.setText(model.getTitle());
         author.setText(model.getAuthor());
         description.setText(model.getDescription());
+
+        final Picasso picasso = PicassoBuilder.getInstance(this.getContext());
+
+        picasso.load(model.getImage()).fit().into(image);
+
+        final ArrayList<String> imagesUrls = model.getImagesUrls();
+
+        image.setOnClickListener(new View.OnClickListener() {
+            int index = 1;
+
+            @Override
+            public void onClick(View v) {
+                if (index >= imagesUrls.size()) {
+                    index = 0;
+                }
+                picasso.load(imagesUrls.get(index)).fit().into(image);
+                index++;
+            }
+        });
     }
 }

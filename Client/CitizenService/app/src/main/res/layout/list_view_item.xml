@@ -23,10 +23,18 @@
             android:layout_weight="1"
             android:gravity="center_vertical"/>
         <TextView
-            android:id="@+id/positiveVotesCount"
-            android:layout_width="fill_parent"
+            android:id="@+id/votesCount"
+            android:layout_width="wrap_content"
             android:layout_height="0dip"
             android:layout_weight="1"
+            android:layout_gravity="left"
+            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/authorText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:layout_gravity="right"
             android:singleLine="true"/>
     </LinearLayout>
 </LinearLayout>

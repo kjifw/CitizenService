@@ -2,8 +2,6 @@ package com.citizen.service.citizenservice;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
-import android.provider.SyncStateContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +12,8 @@ import android.widget.TextView;
 import com.citizen.service.citizenservice.helpers.PicassoBuilder;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Response;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Request;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.util.List;
 
 public class ListItemAdapter extends BaseAdapter{
@@ -59,7 +51,8 @@ public class ListItemAdapter extends BaseAdapter{
 
         ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
         TextView txtTitle = (TextView) convertView.findViewById(R.id.titleText);
-        TextView txtVotes = (TextView) convertView.findViewById(R.id.positiveVotesCount);
+        TextView txtVotes = (TextView) convertView.findViewById(R.id.votesCount);
+        TextView txtAuthor = (TextView) convertView.findViewById(R.id.authorText);
 
         IssueListItemModel listItem = (IssueListItemModel)getItem(position);
 
@@ -68,8 +61,8 @@ public class ListItemAdapter extends BaseAdapter{
         picasso.load(listItem.getImage()).fit().into(imgIcon);
         txtTitle.setText(listItem.getTitle());
         txtVotes.setText(listItem.getVotesCount());
+        txtAuthor.setText(listItem.getAuthor());
 
         return convertView;
     }
-
 }

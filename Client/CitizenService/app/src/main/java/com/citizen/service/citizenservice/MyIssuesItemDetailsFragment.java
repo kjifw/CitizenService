@@ -1,6 +1,5 @@
 package com.citizen.service.citizenservice;
 
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.citizen.service.citizenservice.helpers.PicassoBuilder;
 import com.citizen.service.citizenservice.models.IssueListItemModel;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class MyIssuesItemDetailsFragment extends Fragment {
     private TextView title;
@@ -31,13 +34,31 @@ public class MyIssuesItemDetailsFragment extends Fragment {
 
             title = (TextView) getActivity().findViewById(R.id.basicDetailsTitle);
             author = (TextView) getActivity().findViewById(R.id.basicDetailsAuthor);
-            description = (TextView) getActivity().findViewById(R.id.basicDetailsDesciption);
+            description = (TextView) getActivity().findViewById(R.id.basicDetailsDescription);
             image = (ImageView) getActivity().findViewById(R.id.basicDetailsImageContainer);
 
             title.setText(model.getTitle());
             author.setText(model.getAuthor());
             description.setText(model.getDescription());
-            //image.setImageURI(model.getImage());
+
+            final Picasso picasso = PicassoBuilder.getInstance(this.getContext());
+
+            picasso.load(model.getImage()).fit().into(image);
+
+            final ArrayList<String> imagesUrls = model.getImagesUrls();
+
+            image.setOnClickListener(new View.OnClickListener() {
+                int index = 1;
+
+                @Override
+                public void onClick(View v) {
+                    if (index >= imagesUrls.size()) {
+                        index = 0;
+                    }
+                    picasso.load(imagesUrls.get(index)).fit().into(image);
+                    index++;
+                }
+            });
         }
     }
 }

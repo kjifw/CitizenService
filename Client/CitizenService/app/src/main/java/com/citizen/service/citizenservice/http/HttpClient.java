@@ -52,7 +52,7 @@ public class HttpClient {
     public void LoadMyIssues(IMyIssue myIssues, ListItemAdapter adapter) {
         TokensDbHandler tokensDbHandler = new TokensDbHandler(this.context, null);
         String loadMyIssuesUrl = String.format("%sapi/issues/my", this.serverUrl);
-        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl, adapter).execute();
+        new LoadMyIssuesAsync(this.context, myIssues, tokensDbHandler.getToken("login"), loadMyIssuesUrl, this.serverUrl, adapter).execute();
     }
 
     public void LoadSearchIssues(ISearchIssue issues, int count){

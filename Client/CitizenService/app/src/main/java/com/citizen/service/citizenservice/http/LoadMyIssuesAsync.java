@@ -26,13 +26,16 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
     private IMyIssue myIssues;
     private String authorizationToken;
     private ListItemAdapter adapter;
+    private String serverUrl;
 
-    public LoadMyIssuesAsync(Context context, IMyIssue myIssues, String authorizationToken, String myIssuesUrl, ListItemAdapter adapter) {
+    public LoadMyIssuesAsync(Context context, IMyIssue myIssues, String authorizationToken,
+                             String myIssuesUrl, String serverUrl, ListItemAdapter adapter) {
         this.myIssuesUrl = myIssuesUrl;
         this.context = context;
         this.myIssues = myIssues;
         this.authorizationToken = authorizationToken;
         this.adapter = adapter;
+        this.serverUrl = serverUrl;
     }
 
     @Override
@@ -83,10 +86,20 @@ public class LoadMyIssuesAsync extends AsyncTask<String, Void, JSONArray>{
         for(int i = 0; i < listOfIssues.length(); i++) {
             try {
                 JSONObject issue = listOfIssues.getJSONObject(i);
-                String imageUrl = issue.getString("ImageUrl").replace("localhost", "10.0.3.2:8594");
+
+                String imageUrl = issue.getString("ImageUrl").replace("http://localhost/", this.serverUrl);
+
                 IssueListItemModel issueForListing = new IssueListItemModel(imageUrl, issue.getString("Title"),
                         String.valueOf((Integer)issue.getInt("UpVotesCount")), issue.getString("Description"),
                         issue.getString("Author"));
+
+                JSONArray issueImagesUrls = issue.getJSONArray("ImagesUrls");
+
+                for(int j = 0; j < issueImagesUrls.length(); j++) {
+                    JSONObject entry = issueImagesUrls.getJSONObject(j);
+                    issueForListing.addImageUrl(entry.getString("Url").replace("http://localhost/", this.serverUrl));
+                }
+
                 issuesReadyForListing.add(issueForListing);
             } catch (JSONException ex){
 

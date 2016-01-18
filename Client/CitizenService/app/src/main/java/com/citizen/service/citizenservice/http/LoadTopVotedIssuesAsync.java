@@ -29,8 +29,8 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
     private String authorizationToken;
     private ListItemAdapter adapter;
 
-    public LoadTopVotedIssuesAsync(Context context, ITopVotedResult topVotedResult,
-                                   String authorizationToken, String topVotedIssuesUrl, String serverUrl, ListItemAdapter adapter) {
+    public LoadTopVotedIssuesAsync(Context context, ITopVotedResult topVotedResult, String authorizationToken,
+                                   String topVotedIssuesUrl, String serverUrl, ListItemAdapter adapter) {
         this.context = context;
         this.topVotedResult = topVotedResult;
         this.authorizationToken = authorizationToken;
@@ -104,6 +104,7 @@ public class LoadTopVotedIssuesAsync extends AsyncTask<String, Void, JSONArray> 
                     JSONObject entry = issueImagesUrls.getJSONObject(j);
                     issueForListing.addImageUrl(entry.getString("Url").replace("http://localhost/", this.serverUrl));
                 }
+
                 issuesReadyForListing.add(issueForListing);
             } catch (JSONException ex) {
 
